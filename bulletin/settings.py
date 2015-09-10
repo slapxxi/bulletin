@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pages',
+    'users',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -105,3 +106,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
   os.path.join(BASE_DIR, "static"),
 )
+
+LOGIN_REDIRECT_URL = '/'
+
+ABSOLUTE_URL_OVERRIDES = {
+  'auth.user': lambda u: '/user/{}/'.format(u.id),
+}

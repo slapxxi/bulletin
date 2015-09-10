@@ -13,8 +13,16 @@
   <header>
     <nav>
       <ul>
-        <li><a href="{% url 'pages/index' %}">Home</a></li>
-        <li><a href="{% url 'pages/about' %}">About</a></li>
+        <li><a href="{% url 'pages:index' %}">Home</a></li>
+        <li><a href="{% url 'pages:about' %}">About</a></li>
+        {% if user.is_authenticated %}
+          <li>
+            Current user: <a href="{% url 'users:user' user.id %}">{{ user.username }}</a>
+          </li>
+          <li><a href="{% url 'users:logout' %}?next=/">Logout</a></li>
+        {% else %}
+          <li><a href="{% url 'users:login' %}">Login</a></li>
+        {% endif %}
       </ul>
     </nav>
   </header>
