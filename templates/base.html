@@ -2,50 +2,89 @@
 {% load staticfiles %}
 <html>
 <head>
-  <title>
-    {% block title %}Bulletin Board | {% endblock %}
-  </title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+	<title>
+		{% block title %}Bulletin Board | {% endblock %}
+	</title>
 
-  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+	<link rel="stylesheet" href="{% static 'css/main.css' %}">
+	<!-- Fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Exo+2:700,600,300,400,500,400italic&amp;subset=latin,cyrillic' rel='stylesheet' type='text/css' />
+	<!--[if lt IE 9]>
+			<script>
+				var e = ("article,aside,figcaption,figure,footer,header,hgroup,nav,section,time").split(',');
+				for (var i = 0; i < e.length; i++) {
+					document.createElement(e[i]);
+				}
+			</script>
+		<![endif]-->
 </head>
 
 <body>
-  <header>
-    {% if user.is_authenticated %}
-      <nav class="current-user">
-        Current user:
-        <a href="{% url 'users:user' user.id %}">{{ user.username }}</a>
-      </nav>
-    {% endif %}
+	<div id="wrapper">
+		<header class="head-site">
+			<div class="wrapper-block">
+				{% if user.is_authenticated %}
+					<nav class="current-user">
+						Current user:
+						<a href="{% url 'users:user' user.id %}">{{ user.username }}</a>
+					</nav>
+				{% endif %}
 
-    <nav>
-      <ul>
-        <li><a href="{% url 'pages:index' %}">Bulletin</a></li>
-        <li><a href="{% url 'pages:about' %}">About</a></li>
-        {% if user.is_authenticated %}
-          <li><a href="{% url 'users:logout' %}?next=/">Logout</a></li>
-        {% else %}
-          <li><a href="{% url 'users:login' %}">Login</a></li>
-        {% endif %}
-      </ul>
-    </nav>
-  </header>
+			</div>
+			<div class="wrapper-block">
+				<nav>
+					<ul>
+						<li><a href="{% url 'pages:index' %}">Bulletin</a></li>
+						<li><a href="{% url 'pages:about' %}">About</a></li>
+						{% if user.is_authenticated %}
+							<li><a href="{% url 'users:logout' %}?next=/">Logout</a></li>
+						{% else %}
+							<li><a href="{% url 'users:login' %}">Login</a></li>
+						{% endif %}
+					</ul>
+				</nav>
+		</header>
 
-  <section class="content">
-    {% block content %}
-    {% endblock %}
-  </section>
 
-  <footer>
-    <small>
-      <time>2015</time>
-      by
-      <a href="https://github.com/slavapavlutin">Slava</a>
-      &
-      <a href="https://github.com/funbek">Denis</a>
-    </small>
-  </footer>
+		<div id="content">
+			<div class="wrapper-block">
+				<section class="content">
+					{% block content %}
+					{% endblock %}
+				</section>
+			</div>
+		</div>
 
-  <script src="{% static 'js/main.js' %}"></script>
+	</div>
+
+
+	<footer class="footer-site">
+		<div class="wrapper-block">
+			<small>
+				<time>2015</time>
+				by
+				<a href="https://github.com/slavapavlutin">Slava</a>
+				&
+				<a href="https://github.com/funbek">Denis</a>
+			</small>
+		</div>
+	</footer>
+
+
+	<!-- Scripts -->
+		<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript">
+			if (typeof jQuery == 'undefined') {
+				document.write(unescape("%3Cscript src='/js/vendor/jquery-2.1.4.min.js' type='text/javascript'%3E%3C/script%3E"));
+			}
+		</script>
+		<!--[if lt IE 8]>
+			<script src="{/js/vendor/jquery-1.11.2.min.js"></script>
+			<script src="/js/vendor/respond.min.js"></script>
+			<script src="/js/vendor/selectivizr-min.js"></script>
+		<![endif]-->
+		<script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

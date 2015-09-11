@@ -1,4 +1,6 @@
 @import "normalize.css";
+@import "bootstrap.css";
+@import "clear.css";
 @import "base.css";
 
 
@@ -40,13 +42,28 @@ header .current-user a {
 
 
 footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
   right: 0;
   padding: 1em;
   text-align: center;
   color: #666;
+}
+html,body {
+    height: 100%
+}
+
+#wrapper {
+    min-height: 100%;
+    margin-bottom: -52px
+}
+
+#wrapper:after {
+    content: "";
+    display: block
+}
+
+.footer-site,
+#wrapper:after {
+    height: 52px
 }
 
 
@@ -58,4 +75,301 @@ footer {
 
 .content > h1 {
   text-align: center;
+}
+
+
+
+
+
+
+
+
+/*Подключаем шрифты*/
+
+
+/*Общие стили*/
+*{
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/*clearfix*/
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+body p{
+  line-height: 20px;
+}
+.wrapper-block{
+  width: 960px;
+  margin: 0 auto;
+}
+
+.upp-text{
+  text-transform: uppercase;
+}
+.bold{
+  font-weight: 600;
+}
+.cen-text{
+  text-align: center;
+}
+.jus-text{
+  text-align: justify;
+}
+.rel-block{
+  position: relative;
+}
+.abs-block{
+  position: absolute;
+}
+.dashed-link{
+  text-decoration: none;
+  border-bottom: 1px dashed #000;
+}
+.right-side-text{
+  text-align: right;
+}
+.left-side-text{
+  text-align: left;
+}
+.left-float{
+  float: left;
+}
+.right-float{
+  float: right;
+}
+
+/*Списки*/
+article ul,
+.marker-li{
+  margin: 15px 0;
+}
+article ul li,
+.marker-li li{
+  position: relative;
+  padding-left: 20px;
+  font-size: 18px;
+}
+article ul li:last-child,
+.marker-li li:last-child {
+  margin-bottom: 0;
+}
+article ul li:before,
+.marker-li li:before{
+  content: '';
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-color: transparent;
+  border-left-color: #999;
+  position: absolute;
+  left: 0;
+  top: 6px;
+}
+article ul.blue-marker li:before,
+.marker-li.blue-marker li:before{
+  border-left-color: #0f5687;
+}
+/*+=+*/
+article p {
+  margin-bottom: 15px;
+}
+
+/*стили для placeholder*/
+::-webkit-input-placeholder{
+  font-size: 14px;
+  color: #666;
+  font-family: "Exo 2", Arial, sans-serif;
+}
+::-moz-placeholder{
+  font-size: 14px;
+  color: #666;
+  font-family: "Exo 2", Arial, sans-serif;
+}/* Firefox 19+ */
+:-moz-placeholder{
+  font-size: 14px;
+  color: #666;
+  font-family: "Exo 2", Arial, sans-serif;
+}/* Firefox 18- */
+:-ms-input-placeholder{
+  font-size: 14px;
+  color: #666;
+  font-family: "Exo 2", Arial, sans-serif;
+}
+/*+=+*/
+/*убираем тень у форм для ios*/
+form input,
+form select{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+/*+=+*/
+/*Убираем форматирование у input*/
+input,
+button,
+textarea{
+  -ms-box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  border: 1px solid #666;
+  width: 100%;
+}
+/*+==+*/
+.input-block,
+.select-block,
+.textarea-block {
+  margin-bottom: 10px;
+}
+.btn-block {
+  margin-top: 20px;
+}
+input,
+textarea,
+select {
+  border: 1px solid #ccc;
+  padding: 0 10px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 13px;
+}
+input {
+  height: 30px;
+  line-height: 30px;
+}
+textarea {
+  resize: none;
+}
+form button {
+  border: none;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #fff;
+  background: #005395;
+  height: 40px;
+  width: auto;
+  display: inline-block;
+  line-height: 40px;
+  padding: 0 20px;
+}
+
+.valign-mid:after{
+  content: "";
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+}
+nav a{
+  text-decoration: none;
+}
+/*Hover effects*/
+.animate-hover,.animate-hover:after, .animate-hover:before, nav a{
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  -ms-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+/*++====++*/
+/*++====++*/
+.red-text {
+  color: #be1e2d;
+}
+/*Угол*/
+.corner {
+  position: relative;
+}
+.corner:after {
+  content: "";
+  position: absolute;
+  border-style: solid;
+  border-width: 10px;
+  border-color: transparent;
+  height: 0px;
+  width: 0px;
+}
+.corner.corner-bottom:after {
+  border-top-color: #eee;
+  right: 10px;
+  top: 100%;
+}
+/*++==++*/
+a:hover,
+a:active,
+a:focus {
+  text-decoration: none;
+}
+img {
+  width: auto;
+  max-width: 100%;
+}
+/*+++======+++*/
+/*++++========++++*/
+
+/*Стили для навигации*/
+
+/*++===++*/
+
+/*Стили для шапки*/
+
+/*++===++*/
+
+
+/*Стили для контента*/
+
+  /*Стили для блока контанта с текстом*/
+
+  /*==*/
+
+
+
+  /*Стили для aside*/
+
+  /*++===++*/
+
+/*++===++*/
+
+/*Стили для footer*/
+
+/*++===++*/
+
+
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+
+@media (min-width: 1199px) {
+  .wrapper-block {
+    width: 1170px;
+  }
+}
+
+@media (max-width: 991px) {
+  .wrapper-block{
+      width: 740px;
+  }
+}
+
+@media (max-width: 767px) {
+  .wrapper-block{
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+    min-width: 320px;
+  }
+}
+@media (max-width: 640px) {
+
 }
