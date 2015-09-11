@@ -24,3 +24,8 @@ Learn the basics of Django.
 ## User Profiles
 
 - [ ] Only authorized users can see profiles of other users.
+
+
+## Misc
+
+- [ ] Write a style guide.
