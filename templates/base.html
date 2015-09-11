@@ -11,20 +11,23 @@
 
 <body>
   <header>
-    {% if user.is_authenticated %}
-      <nav class="current-user">
+    <nav class="user-nav">
+      {% if user.is_authenticated %}
         <strong>User:</strong>
         <a href="{% url 'users:user' user.id %}">{{ user.username }}</a>
         |
         <a href="{% url 'users:logout' %}?next=/">Logout</a>
-      </nav>
-    {% else %}
-      <nav class="current-user">
+      {% else %}
         <a href="{% url 'users:login' %}">Login</a>
-      </nav>
-    {% endif %}
+      {% endif %}
+    </nav>
 
-    <nav>
+    <form action="#" class="search">
+      <input type="search" placeholder="Ads you're looking for...">
+      <input type="submit" value="Search">
+    </form>
+
+    <nav class="nav">
       <ul>
         <li><a href="{% url 'pages:index' %}">Bulletin</a></li>
         <li><a href="{% url 'pages:about' %}">About</a></li>

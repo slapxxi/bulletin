@@ -6,11 +6,15 @@ header {
   overflow: hidden;
   text-align: right;
   font-size: 0.9em;
-  padding: 2em;
+  padding: 1.5em;
 }
 
-header ul {
+header .nav {
   float: right;
+  padding: 0.5em;
+}
+
+header .nav ul {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -30,13 +34,22 @@ header a:hover {
   text-decoration: underline;
 }
 
-header .current-user {
+header .user-nav {
   float: left;
+  padding: 0.5em;
   color: #99a;
 }
 
-header .current-user a {
+header .user-nav a {
   color: #18f;
+}
+
+header .search {
+  float: right;
+}
+
+header .search input {
+  margin: 0;
 }
 
 
