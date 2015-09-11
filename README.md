@@ -3,6 +3,17 @@
 Learn the basics of Django.
 
 
+## Ads
+
+- [ ] Users can navigate ads in various **categories**.
+- [ ] Users can publish their ads if they're registered.
+- [ ] Users can search for ads.
+
+### Categories
+
+- [ ] Users can add ads to existing categories.
+
+
 ## Account Management
 
 - [x] Users can login and logout if they are registered.

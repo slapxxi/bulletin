@@ -25,26 +25,23 @@
 	<div id="wrapper">
 		<header class="head-site">
 			<div class="wrapper-block">
-				{% if user.is_authenticated %}
-					<nav class="current-user">
-						Current user:
-						<a href="{% url 'users:user' user.id %}">{{ user.username }}</a>
-					</nav>
-				{% endif %}
+				<nav class="user-nav">
+			      {% if user.is_authenticated %}
+			        <strong>User:</strong>
+			        <a href="{% url 'users:user' user.id %}">{{ user.username }}</a>
+			        |
+			        <a href="{% url 'users:logout' %}?next=/">Logout</a>
+			      {% else %}
+			        <a href="{% url 'users:login' %}">Login</a>
+			      {% endif %}
+			    </nav>
 
+			    <form action="#" class="search">
+			      <input type="search" placeholder="Ads you're looking for...">
+			      <input type="submit" value="Search">
+			    </form>
 			</div>
-			<div class="wrapper-block">
-				<nav>
-					<ul>
-						<li><a href="{% url 'pages:index' %}">Bulletin</a></li>
-						<li><a href="{% url 'pages:about' %}">About</a></li>
-						{% if user.is_authenticated %}
-							<li><a href="{% url 'users:logout' %}?next=/">Logout</a></li>
-						{% else %}
-							<li><a href="{% url 'users:login' %}">Login</a></li>
-						{% endif %}
-					</ul>
-				</nav>
+
 		</header>
 
 
