@@ -6,5 +6,7 @@
 {% endblock %}
 
 {% block content %}
-  <h1>{{ user.username }}</h1>
+  <h1>{{ user.username|title }}'s Personal Page</h1>
+
+  <p>{{ user.username|title }} has no ads yet.</p>
 {% endblock %}
