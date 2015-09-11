@@ -3,12 +3,14 @@
 
 
 header {
+  overflow: hidden;
   text-align: right;
   font-size: 0.9em;
   padding: 2em;
 }
 
 header ul {
+  float: right;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -17,7 +19,6 @@ header ul {
 header ul > li {
   display: inline-block;
   margin-right: 1em;
-  font-weight: bold;
 }
 
 header a:link, header a:visited {

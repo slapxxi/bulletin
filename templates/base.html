@@ -13,8 +13,14 @@
   <header>
     {% if user.is_authenticated %}
       <nav class="current-user">
-        Current user:
+        <strong>User:</strong>
         <a href="{% url 'users:user' user.id %}">{{ user.username }}</a>
+        |
+        <a href="{% url 'users:logout' %}?next=/">Logout</a>
+      </nav>
+    {% else %}
+      <nav class="current-user">
+        <a href="{% url 'users:login' %}">Login</a>
       </nav>
     {% endif %}
 
@@ -22,11 +28,6 @@
       <ul>
         <li><a href="{% url 'pages:index' %}">Bulletin</a></li>
         <li><a href="{% url 'pages:about' %}">About</a></li>
-        {% if user.is_authenticated %}
-          <li><a href="{% url 'users:logout' %}?next=/">Logout</a></li>
-        {% else %}
-          <li><a href="{% url 'users:login' %}">Login</a></li>
-        {% endif %}
       </ul>
     </nav>
   </header>
