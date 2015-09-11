@@ -1,3 +1,61 @@
-body {
-  font-family: Helvetica, sans-serif;
+@import "normalize.css";
+@import "base.css";
+
+
+header {
+  text-align: right;
+  font-size: 0.9em;
+  padding: 2em;
+}
+
+header ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+header ul > li {
+  display: inline-block;
+  margin-right: 1em;
+  font-weight: bold;
+}
+
+header a:link, header a:visited {
+  text-decoration: none;
+  color: #889;
+}
+
+header a:hover {
+  text-decoration: underline;
+}
+
+header .current-user {
+  float: left;
+  color: #99a;
+}
+
+header .current-user a {
+  color: #18f;
+}
+
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1em;
+  text-align: center;
+  color: #666;
+}
+
+
+.content {
+  width: 80%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.content > h1 {
+  text-align: center;
 }

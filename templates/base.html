@@ -11,14 +11,18 @@
 
 <body>
   <header>
+    {% if user.is_authenticated %}
+      <nav class="current-user">
+        Current user:
+        <a href="{% url 'users:user' user.id %}">{{ user.username }}</a>
+      </nav>
+    {% endif %}
+
     <nav>
       <ul>
-        <li><a href="{% url 'pages:index' %}">Home</a></li>
+        <li><a href="{% url 'pages:index' %}">Bulletin</a></li>
         <li><a href="{% url 'pages:about' %}">About</a></li>
         {% if user.is_authenticated %}
-          <li>
-            Current user: <a href="{% url 'users:user' user.id %}">{{ user.username }}</a>
-          </li>
           <li><a href="{% url 'users:logout' %}?next=/">Logout</a></li>
         {% else %}
           <li><a href="{% url 'users:login' %}">Login</a></li>
@@ -27,8 +31,20 @@
     </nav>
   </header>
 
-  {% block content %}
-  {% endblock %}
+  <section class="content">
+    {% block content %}
+    {% endblock %}
+  </section>
+
+  <footer>
+    <small>
+      <time>2015</time>
+      by
+      <a href="https://github.com/slavapavlutin">Slava</a>
+      &
+      <a href="https://github.com/funbek">Denis</a>
+    </small>
+  </footer>
 
   <script src="{% static 'js/main.js' %}"></script>
 </body>
