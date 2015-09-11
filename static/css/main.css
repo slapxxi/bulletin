@@ -37,6 +37,8 @@ header a:hover {
 header .user-nav {
   float: left;
   padding: 0.5em;
+  border: 1px solid #ccd;
+  border-radius: 5px;
   color: #99a;
 }
 
