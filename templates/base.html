@@ -25,21 +25,32 @@
 	<div id="wrapper">
 		<header class="head-site">
 			<div class="wrapper-block">
-				<nav class="user-nav">
-			      {% if user.is_authenticated %}
-			        <strong>User:</strong>
-			        <a href="{% url 'users:user' user.id %}">{{ user.username }}</a>
-			        |
-			        <a href="{% url 'users:logout' %}?next=/">Logout</a>
-			      {% else %}
-			        <a href="{% url 'users:login' %}">Login</a>
-			      {% endif %}
-			    </nav>
+				<div class="row">
+					<div class="col-xs-1">
 
-			    <form action="#" class="search">
-			      <input type="search" placeholder="Ads you're looking for...">
-			      <input type="submit" value="Search">
-			    </form>
+						<nav class="user-nav">
+				      {% if user.is_authenticated %}
+				        <strong>User:</strong>
+				        <a href="{% url 'users:user' user.id %}">{{ user.username }}</a>
+				        |
+				        <a href="{% url 'users:logout' %}?next=/">Logout</a>
+				      {% else %}
+				        <a href="{% url 'users:login' %}">Login</a>
+				      {% endif %}
+				    </nav>
+					</div>
+
+					<div class="col-sm-3 rig-float">
+				    <form action="#" class="search">
+				    	<div class="input-block">
+				      	<input type="search" placeholder="Ads you're looking for...">
+				    	</div>
+				    	<div class="btn-block">
+				      	<button class="styled-btn"><span>Search</span></button>
+				    	</div>
+				    </form>
+				  </div>
+				</div>
 			</div>
 
 		</header>
@@ -59,13 +70,15 @@
 
 	<footer class="footer-site">
 		<div class="wrapper-block">
-			<small>
-				<time>2015</time>
-				by
-				<a href="https://github.com/slavapavlutin">Slava</a>
-				&
-				<a href="https://github.com/funbek">Denis</a>
-			</small>
+			<div class="footer-site__block">
+				<small>
+					<time>2015</time>
+					by
+					<a href="https://github.com/slavapavlutin">Slava</a>
+					&
+					<a href="https://github.com/funbek">Denis</a>
+				</small>
+			</div>
 		</div>
 	</footer>
 

@@ -34,18 +34,19 @@ label:hover, label:focus {
 
 input[type=search], input[type=text], input[type=password] {
   width: 100%;
-  margin: 1em 0;
   padding: 0.5em;
   border: 1px solid #BBB;
-  border-radius: 5px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
   background-color: #f3f3f3;
   outline: none;
   color: #99A;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-input[type=search] {
-  width: auto;
-}
 
 input[type=search]:focus, input[type=text]:focus, input[type=password]:focus {
   color: #556;
