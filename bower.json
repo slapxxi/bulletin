@@ -1,0 +1,7 @@
+{
+  "name": "bulletin",
+  "version": "0.0.1",
+  "main": "static/js/app.js",
+  "dependencies": {},
+  "overrides": {}
+}
