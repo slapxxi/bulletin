@@ -38,3 +38,6 @@ static/
 
 # Bower stuff.
 bower_components/
+
+# Vendor assets.
+vendor/

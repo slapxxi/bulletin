@@ -1,7 +1,10 @@
 {
   "name": "bulletin",
   "version": "0.0.1",
-  "main": "static/js/app.js",
-  "dependencies": {},
+  "main": "static/js/bulletin.js",
+  "dependencies": {
+    "jquery": ">= 2.0",
+    "respond": ">= 1.0"
+  },
   "overrides": {}
 }

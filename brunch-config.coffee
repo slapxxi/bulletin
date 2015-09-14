@@ -1,10 +1,12 @@
 exports.config =
   paths:
     public: 'static'
-    watched: ['public']
+    watched: ['public', 'vendor']
   files:
     javascripts:
-      joinTo: 'js/bulletin.js'
+      joinTo:
+        'js/bulletin.js': /^public/
+        'js/vendor.js': /^vendor|bower_components/
     stylesheets:
       joinTo: 'css/bulletin.css'
     templates:
