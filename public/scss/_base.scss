@@ -1,0 +1,115 @@
+* { @include box-sizing(border-box); }
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: $main-font-family;
+}
+
+
+// Block elements
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $grey-middle;
+  font-family: $heading-font-family;
+}
+
+
+// Inline elements
+
+a {
+  &:link,
+  &:visited {
+    color: $blue;
+    text-decoration: none;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: underline;
+  }
+}
+
+img {
+  max-width: 100%;
+  width: auto;
+}
+
+
+// Forms
+form {
+  input,
+  select {
+    @include appearance(none);
+  }
+
+  label {
+    color: $grey-middle;
+    display: block;
+
+    &:hover,
+    &:focus {
+      color: $grey-middle;
+      cursor: pointer;
+    }
+  }
+
+  .helptext {
+    color: $green;
+  }
+}
+
+// Inputs
+
+input,
+button,
+textarea {
+  @include box-shadow(none);
+  border: 1px solid $grey-middle;
+  width: 100%;
+}
+
+
+input[type=text],
+input[type=search],
+input[type=password] {
+  @include box-sizing(border-box);
+  @include border-radius(3px);
+  background-color: $grey-very-light;
+  border: 1px solid $grey-light;
+  color: $grey-light;
+  outline: none;
+  padding: 0.5em;
+  width: 100%;
+
+  &:focus {
+    border-color: $blue;
+    color: $grey-middle;
+    outline: none;
+    background-color: $white;
+    box-shadow: 1px 5px 2px rgba(0, 0, 100, 0.1);
+  }
+}
+
+
+input[type=submit] {
+  background-color: white;
+  border: 1px solid $grey-light;
+  border-radius: 5px;
+  color: $grey-middle;
+  padding: 0.5em;
+
+  &:hover {
+    border-color: $blue;
+    color: $blue;
+  }
+}

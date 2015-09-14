@@ -1,0 +1,30 @@
+header {
+  padding: 1.5em;
+
+  a { color: $grey-middle; }
+
+  ul {
+    @include reset-list;
+
+    > li {
+      display: inline-block;
+      margin-right: 1em;
+    }
+  }
+
+  .user-nav {
+    @include border-radius(5px);
+    float: left;
+    padding: 0.5em;
+    border: 1px solid $grey-light;
+    color: $grey-light;
+
+    a:link {
+      color: $blue;
+    }
+  }
+
+  .search {
+    input { margin-top: 0; }
+  }
+}
