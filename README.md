@@ -29,3 +29,4 @@ Learn the basics of Django.
 ## Misc
 
 - [ ] Write a style guide.
+- [x] Configure and setup Brunch
