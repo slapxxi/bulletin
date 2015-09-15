@@ -20,3 +20,7 @@ exports.config =
           'bower_components/bourbon/app/assets/stylesheets/'
           'bower_components/neat/app/assets/stylesheets/'
         ]
+    elmBrunch:
+      options:
+        mainModules: ['public/elm/main.elm']
+        outputFolder: ['static/js/']

@@ -17,6 +17,7 @@
     "uglify-js-brunch": ">= 1.0 < 1.9",
     "clean-css-brunch": ">= 1.0 < 1.9",
     "auto-reload-brunch": ">= 1.0 < 1.9",
-    "sass-brunch": ">= 1.8 < 1.9"
+    "sass-brunch": ">= 1.8 < 1.9",
+    "elm-brunch": ">= 0.3"
   }
 }
