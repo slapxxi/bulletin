@@ -26,7 +26,13 @@ Learn the basics of Django.
 - [ ] Only authorized users can see profiles of other users.
 
 
+## User Interface
+
+- [x] Setup and configure Brunch.
+- [ ] Use semantic HTML.
+- [ ] Make UI responsive & mobile-friendly.
+
+
 ## Misc
 
 - [ ] Write a style guide.
-- [x] Setup and configure Brunch.
