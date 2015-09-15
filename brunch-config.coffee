@@ -16,3 +16,7 @@ exports.config =
       options:
         allowCache: false
         options: ['--style expanded']
+        includePaths: [
+          'bower_components/bourbon/app/assets/stylesheets/'
+          'bower_components/neat/app/assets/stylesheets/'
+        ]
