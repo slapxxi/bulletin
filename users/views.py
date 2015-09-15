@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import CreateView
-
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+
+from .models import User
+from .forms import UserCreationForm
 
 
 @login_required(login_url='users:login')

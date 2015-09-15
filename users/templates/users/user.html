@@ -2,11 +2,12 @@
 
 {% block title %}
 {{ block.super }}
-{{ user.username }}
+{{ user.username }}'s Profile
 {% endblock %}
 
 {% block content %}
   <h1>{{ user.username|title }}'s Personal Page</h1>
 
   <p>{{ user.username|title }} has no ads yet.</p>
+  <p><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
 {% endblock %}
