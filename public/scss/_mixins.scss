@@ -1,3 +1,15 @@
+// Selector variables
+$headings: h1, h2, h3, h4, h5, h6;
+
+$links: "a:link, a:visited";
+$links-active: "a:hover, a:focus, a:active";
+$links-empty: "a[href='#']";
+$links-external: "a[href^='http']";
+$links-mail: "a[href^='mailto:']";
+
+
+// General-purpose mixins
+
 @mixin reset-list {
   list-style: none;
   padding: 0;
@@ -5,43 +17,16 @@
 }
 
 
-// Fixes the issue where the parent of floating children renders
-// as empty.
-@mixin clearfix {
-  &:after {
-    clear: both;
-    content: ' ';
-    display: block;
-    font-size: 0;
-    height: 0;
-    visibility: hidden;
-  }
-}
-
-
-// CSS3 Features
+// Prefixed CSS3 mixins
 
 @mixin box-shadow($value) {
-  -ms-box-shadow: $value;
-  -webkit-box-shadow: $value;
-  -moz-box-shadow: $value;
-  box-shadow: $value;
+  @include prefixer(box-shadow, $value, ms webkit moz);
 }
 
-@mixin appearance($value) {
-  -webkit-appearance: $value;
-  -moz-appearance: $value;
-  appearance: $value;
-}
-
-@mixin box-sizing($value) {
-  -webkit-box-sizing: $value;
-  -moz-box-sizing: $value;
-  box-sizing: $value;
-}
+// @mixin box-sizing($value) {
+//   @include prefixer(box-sizing, $value, ms webkit moz);
+// }
 
 @mixin border-radius($value) {
-  -webkit-border-radius: $value;
-  -moz-border-radius: $value;
-  border-radius: $value;
+  @include prefixer(border-radius, $value, ms webkit moz);
 }

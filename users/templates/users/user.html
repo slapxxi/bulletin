@@ -6,8 +6,10 @@
 {% endblock %}
 
 {% block content %}
-  <h1>{{ user.username|title }}'s Personal Page</h1>
+  <section>
+    <h1>{{ user.username|title }}'s Profile</h1>
 
-  <p>{{ user.username|title }} has no ads yet.</p>
-  <p><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+    <p>{{ user.username|title }} has no ads yet.</p>
+    <p><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+  </section>
 {% endblock %}

@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'pages',
     'users',
+    'ads',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -110,5 +111,7 @@ STATICFILES_DIRS = (
 LOGIN_REDIRECT_URL = '/'
 
 ABSOLUTE_URL_OVERRIDES = {
-  'auth.user': lambda u: '/user/{}/'.format(u.id),
+  'auth:user': lambda u: '/user/{}/'.format(u.id),
 }
+
+AUTH_USER_MODEL = 'users.User'

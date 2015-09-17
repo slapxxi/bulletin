@@ -9,10 +9,15 @@
 		{% block title %}Bulletin Board | {% endblock %}
 	</title>
 
+	<link href='https://fonts.googleapis.com/css?family=Raleway:400,300,200,500,600,700,800' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
 	<link rel="stylesheet" href="{% static 'css/bulletin.css' %}">
 
+	<script src="{% static 'js/main.js' %}"></script>
 
-	{# Add support of HTML5 to IE #}
+	{# Support HTML5 tags in the outdated versions of IE #}
 	<!--[if lt IE 9]>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js">
 		</script>
@@ -20,76 +25,65 @@
 </head>
 
 <body>
-	<div id="wrapper">
-		<header class="head-site">
-			<div class="wrapper-block">
-				<div class="row">
-					<div class="col-xs-1">
+	<header class="site-header">
+		<nav class="site-nav-main">
+			<h1 class="site-logo">
+				<a href="{% url 'pages:index' %}">Bulletin</a>
+			</h1>
 
-						<nav class="user-nav">
-				      {% if user.is_authenticated %}
-				        <strong>User:</strong>
-				        <a href="{% url 'users:user' user.id %}">{{ user.username }}</a>
-				        |
-				        <a href="{% url 'users:logout' %}?next=/">Logout</a>
-				      {% else %}
-				        <a href="{% url 'users:login' %}">Login</a>
-				      {% endif %}
-				    </nav>
-					</div>
+			<ul class="site-nav">
+				<li><a href="{% url 'ads:index' %}" class="fa fa-folder">&nbsp; Ads</a></li>
+				<li><a href="{% url 'ads:categories' %}">Categories</a></li>
+				<li><a href="{% url 'ads:locations' %}">Locations</a></li>
+			</ul>
+		</nav>
+		{# end of .site-nav#}
 
-					<div class="col-sm-3 rig-float">
-				    <form action="#" class="search">
-				    	<div class="input-block">
-				      	<input type="search" placeholder="Ads you're looking for...">
-				    	</div>
-				    	<div class="btn-block">
-								<input type="submit" value="Search">
-				    	</div>
-				    </form>
-				  </div>
-				</div>
-			</div>
+		<nav class="site-nav-secondary">
+			{% include "users/panel.html" %}
 
-		</header>
+	    <form action="#" class="site-search" role="search">
+	    	<input type="search" placeholder="Ads you're looking for...">
+				<button type="submit"><span class="fa fa-search"></span></button>
+	    </form>
+		</nav>
+		{# end of .site-subnav#}
+	</header>
+	{# end of .site-header #}
 
 
-		<div id="content">
-			<div class="wrapper-block">
-				<section class="content">
-					{% block content %}
-					{% endblock %}
-				</section>
-			</div>
+	<section class="site-content">
+		<div class="site-content-main">
+			{% block content %}
+			{% endblock %}
 		</div>
 
-	</div>
-
-
-	<footer class="footer-site">
-		<div class="wrapper-block">
-			<div class="footer-site__block">
-				<small>
-					<time>2015</time>
-					by
-					<a href="https://github.com/slavapavlutin">Slava</a>
-					&
-					<a href="https://github.com/funbek">Denis</a>
-				</small>
-			</div>
+		<div class="site-content-aside">
+			<h1>Aside</h1>
+			{% lorem 3 p %}
 		</div>
+	</section>
+	{# end of .site-content #}
+
+
+	<footer class="site-footer">
+		<small class="site-copyright">
+			<time datetime="{% now 'Y-m-d' %}}">{% now 'Y' %}</time>
+			&copy;
+			<a href="https://github.com/slavapavlutin" rel="author external">Slava Pavlutin</a>
+			&
+			<a href="https://github.com/funbek" rel="author external">Denis Radchenko</a>
+			|
+			<a href="{% url 'pages:about' %}" class="fa fa-hand-peace-o fa-2x">&nbsp;</a>
+		</small>
 	</footer>
+	{# end of .site-footer #}
 
-
-
-		<script src="{% static 'js/vendor.js' %}"></script>
-		<!--[if lt IE 8]>
-			<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-		<![endif]-->
-		<script src="{% static 'js/bulletin.js' %}"></script>
-
-		<script>
-			require('public/js/main')
-		</script>
+	<script src="{% static 'js/vendor.js' %}"></script>
+	<!--[if lt IE 8]>
+		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<![endif]-->
+	<script src="{% static 'js/bulletin.js' %}"></script>
+	<script>require('public/js/main')</script>
 </body>
 </html>

@@ -3,11 +3,17 @@
 {% block title %}{{ block.super }}Register{% endblock %}
 
 {% block content %}
-  <h1>Register</h1>
+  <section class="users-register">
+    <h1>Register</h1>
 
-  <form action="{% url 'users:register' %}" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Register">
-  </form>
+    <form action="{% url 'users:register' %}" method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Register">
+    </form>
+
+    <p>
+      <a href="{% url 'users:login' %}">Already have an account?</a>
+    </p>
+  </section>
 {% endblock %}

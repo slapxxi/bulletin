@@ -1,4 +1,7 @@
-* { @include box-sizing(border-box); }
+@include selection {
+  background-color: $blue;
+  color: $white-dark;
+}
 
 html,
 body {
@@ -6,38 +9,54 @@ body {
 }
 
 body {
-  font-family: $main-font-family;
+  font: {
+    family: $main-font-family;
+    size: 16px;
+  }
+  color: $grey-middle-light;
 }
 
 
 // Block elements
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+#{$headings} {
+  font: {
+    family: $heading-font-family;
+    weight: 600;
+  }
   color: $grey-middle;
-  font-family: $heading-font-family;
+}
+
+p {
+  margin: 2em 0;
+  line-height: 1.5em;
 }
 
 
 // Inline elements
 
-a {
-  &:link,
-  &:visited {
-    color: $blue;
-    text-decoration: none;
-  }
-
-  &:hover,
-  &:focus,
-  &:active {
-    text-decoration: underline;
-  }
+#{$links} {
+  text-decoration: none;
+  color: $blue;
 }
+
+#{$links-active} {
+  text-decoration: underline;
+}
+
+#{$links-empty} {
+  cursor: not-allowed;
+  &:hover { text-decoration: none; }
+}
+
+#{$links-external} {
+  cursor: alias;
+}
+
+#{$links-mail} {
+  cursor: context-menu;
+}
+
 
 img {
   max-width: 100%;
@@ -46,6 +65,7 @@ img {
 
 
 // Forms
+
 form {
   input,
   select {
@@ -53,18 +73,16 @@ form {
   }
 
   label {
-    color: $grey-middle;
     display: block;
+    margin: 1em 0;
+    color: $grey-light;
 
     &:hover,
+    &:active,
     &:focus {
       color: $grey-middle;
       cursor: pointer;
     }
-  }
-
-  .helptext {
-    color: $green;
   }
 }
 
@@ -73,23 +91,31 @@ form {
 input,
 button,
 textarea {
+  @include placeholder {
+    color: $grey-very-light;
+  }
   @include box-shadow(none);
   border: 1px solid $grey-middle;
-  width: 100%;
 }
 
 
-input[type=text],
-input[type=search],
-input[type=password] {
+#{$all-text-inputs},
+input[type=submit] {
   @include box-sizing(border-box);
-  @include border-radius(3px);
-  background-color: $grey-very-light;
-  border: 1px solid $grey-light;
+  @include border-radius(5px);
+  padding: 0.5em;
+  border: 1px solid $grey-very-light;
+  background-color: $white-dark;
   color: $grey-light;
   outline: none;
-  padding: 0.5em;
-  width: 100%;
+
+  &.invalid {
+    border-color: red;
+  }
+
+  &:hover {
+    border-color: $grey-light;
+  }
 
   &:focus {
     border-color: $blue;
@@ -97,16 +123,21 @@ input[type=password] {
     outline: none;
     background-color: $white;
     box-shadow: 1px 5px 2px rgba(0, 0, 100, 0.1);
+
+    &.valid {
+      border-color: $green;
+    }
+
+    &.invalid {
+      border-color: red;
+    }
   }
 }
 
 
 input[type=submit] {
-  background-color: white;
-  border: 1px solid $grey-light;
-  border-radius: 5px;
+  background-color: $white;
   color: $grey-middle;
-  padding: 0.5em;
 
   &:hover {
     border-color: $blue;

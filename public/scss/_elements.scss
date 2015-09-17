@@ -1,0 +1,54 @@
+a.fa {
+  text-decoration: none;
+  &:hover {
+    color: $green;
+  }
+}
+
+.helptext {
+  color: $green;
+}
+
+.site-header {
+  #{$links} {
+    color: $grey-light;
+  }
+
+  a.active,
+  #{$links-active} {
+    color: $blue;
+  }
+}
+
+
+.site-nav {
+  @include reset-list;
+
+  > li {
+    display: inline-block;
+    vertical-align: sub;
+    margin-left: 0.8em;
+  }
+}
+
+
+.site-search {
+  input[type=search] {
+    @include border-radius(5px 0 0 5px);
+    @include box-shadow(none);
+    border-right: none;
+  }
+
+  button[type=submit] {
+    @include border-radius(0 5px 5px 0);
+    padding: 0.5em;
+    border-color: $grey-very-light;
+    background-color: $white;
+    color: $grey-light;
+
+    &:hover {
+      border-color: $blue;
+      color: $blue;
+    }
+  }
+}

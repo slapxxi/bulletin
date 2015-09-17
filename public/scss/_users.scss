@@ -1,0 +1,28 @@
+.users-panel {
+  @include border-radius(5px);
+  color: $grey-light;
+
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+
+.users-register,
+.users-login {
+  #{$all-text-inputs} {
+    width: 100%;
+  }
+
+  input[type=submit] {
+    display: block;
+    width: 20%;
+    margin-right: 80%;
+    margin-left: auto;
+  }
+
+  a {
+    display: block;
+    text-align: right;
+  }
+}

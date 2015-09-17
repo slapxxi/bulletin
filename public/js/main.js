@@ -1,28 +1,39 @@
 $(document).ready(function() {
-    $(".trigger-button").on('ontouchstart' in window ? 'touchstart' : 'click', function() {
-        $(".trigger-button").not(this).removeClass("active");
-        $(this).toggleClass("active");
-    });
+    // var source = document.getElementById('elm-lang');
+    // Elm.embed(Elm.Main, source);
+    $('[data-confirm]').on('click', require_confirmation);
 
+    $('[data-validate]')
+      .addClass('valid')
+      .on('keydown', function(e) {
+        $input = $(e.currentTarget);
+        $input.removeClass('valid');
+        $input.addClass('invalid');
+      })
 
-    $(document).on( "click", function(event){
-        if( $(event.target).closest(".trigger-button, .hidden-block").length )
-        return;
-          $(".trigger-button.active").removeClass("active");
-          event.stopPropagation();
-    });
-
-    const TOP_SHOW = 150;
-    const DELAY = 1000;
-
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > TOP_SHOW) $('#top').fadeIn();
-        else $('#top').fadeOut();
-    });
-
-    $('#top').click(function () {
-        $('body, html').animate({
-        scrollTop: 0
-      }, DELAY);
+    $('.site-header a[href]').each(function(_, link) {
+        make_link_active(link);
     });
 })
+
+
+function require_confirmation(event) {
+    $link = $(event.currentTarget);
+    result = confirm($link.attr('data-confirm'));
+    if (result) return true
+    return event.preventDefault();
+}
+
+
+function make_link_active(link) {
+    $link = $(link);
+    if ($link.attr('href') == current_url()) {
+        $link.attr('href', '#')
+        $link.addClass('active');
+    }
+}
+
+
+function current_url() {
+    return window.location.pathname;
+}
