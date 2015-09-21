@@ -5,7 +5,8 @@ from .models import User
 
 class UserCreationForm(forms.ModelForm):
   error_messages = {
-    'password_mismatch': 'The two password fields did not match.'
+    'password_mismatch': 'The two password fields did not match.',
+    'missing_email': 'Email is required.',
   }
 
   password = forms.CharField(widget=forms.PasswordInput)
@@ -14,6 +15,12 @@ class UserCreationForm(forms.ModelForm):
   class Meta:
     model = User
     fields = ('username', 'email')
+
+  def clean_email(self):
+    email = self.cleaned_data.get('email')
+    if not email:
+      raise forms.ValidationError(self.error_messages['missing_email'], code='missing_email')
+    return email
 
   def clean_password_confirmation(self):
     password = self.cleaned_data.get("password")
