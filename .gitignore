@@ -27,20 +27,23 @@ Thumbs.db
 *.sublime-project
 *.sublime-workspace
 
-# NPM packages folder.
+# NPM packages folder
 node_modules/
 
-# Brunch folder for temporary files.
+# Brunch folder for temporary files
 tmp/
 
-# Brunch output folder.
+# Brunch output folder
 static/
 
-# Bower stuff.
+# Bower stuff
 bower_components/
 
-# Vendor assets.
+# Vendor assets
 vendor/
 
 # Elm stuff
 elm-stuff/
+
+# Media files
+media/
