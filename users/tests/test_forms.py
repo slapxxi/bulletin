@@ -17,6 +17,11 @@ class UserCreationFormTest(TestCase):
     form = UserCreationForm(data=self.valid_data)
     self.assertIsInstance(form.save(), User)
 
+  def test_username_unique(self):
+    self._create_user(self.valid_data)
+    form = UserCreationForm(data=self.valid_data)
+    self.assertRaises(ValueError, lambda: form.save())
+
   def test_email_required(self):
     self.valid_data.pop('email')
     form = UserCreationForm(data=self.valid_data)
@@ -31,3 +36,9 @@ class UserCreationFormTest(TestCase):
     self.valid_data.pop('password')
     form = UserCreationForm(data=self.valid_data)
     self.assertRaises(ValueError, lambda: form.save())
+
+  def _create_user(self, data):
+    user = User.objects.create(username=data['username'])
+    user.set_password(data['password'])
+    user.save()
+    return user

@@ -4,6 +4,8 @@
 {{ block.super }} Home
 {% endblock %}
 
+{% block breadcrumbs %}
+{% endblock %}
 
 {% block content %}
   <h1>Bulletin Board</h1>
@@ -12,7 +14,8 @@
   <p>
     Ready to sale your stuff? Moving to a new place and getting rid
     of burden?
-    Publish an ad and easily make money to boost your life.
+    <a href="{% url 'ads:new' %}">Publish an ad</a>
+    and let us make you some money.
   </p>
 
   <h2>Share via Social Networks</h2>

@@ -6,6 +6,11 @@ User |
 {{ user.username }}
 {% endblock %}
 
+{% block breadcrumbs %}
+  {{ block.super }}
+  <li><a href="{% url 'users:user' user.id %}">{{ user.username }}</a></li>
+{% endblock %}
+
 {% block content %}
   <section>
     <h1>{{ user.username|title }}'s Profile</h1>

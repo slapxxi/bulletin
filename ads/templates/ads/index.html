@@ -4,10 +4,29 @@
 {{ block.super }} Advertisements
 {% endblock %}
 
-{% block content %}
-  <section>
-    <h1>Advertisements</h1>
 
-    {% lorem 3 p %}
+{% block breadcrumbs %}
+  {{ block.super }}
+  <li><a href="{% url 'ads:index' %}">Advertisements</a></li>
+{% endblock %}
+
+
+{% block content %}
+  <section class="ads-index">
+    <h1>Latest Advertisements</h1>
+    {% include "ads/list-ads.html" %}
+  </section>
+{% endblock %}
+
+
+{% block aside %}
+  <section class="categories">
+    <h1>Categories</h1>
+    {% include "ads/list-categories.html" %}
+  </section>
+
+  <section class="locations">
+    <h1>Locations</h1>
+    {% include "ads/list-categories.html" %}
   </section>
 {% endblock %}

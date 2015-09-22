@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {{ block.super }}
+  Advertisement |
+  {{ ad.title }}
+{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  <li><a href="{% url 'ads:index' %}">Advertisements</a></li>
+  <li><a href="{% url 'ads:show' ad.id %}">"{{ ad.title }}"</a></li>
+{% endblock %}
+
+{% block content %}
+  <section class="ads-show ads-ad">
+    <header>
+      <h1>{{ ad.title|title }}</h1>
+      <p>
+        Published at
+        <time datetime="{{ ad.published_at }}">
+          {{ ad.published_at|date:'d M Y' }}
+        </time>
+        by
+        <a href="{% url 'users:user' ad.author.id %}">{{ ad.author.username }}</a>
+      </p>
+      <p class="price">
+        {{ ad.price }}
+      </p>
+    </header>
+
+    <p>{{ ad.description }}</p>
+
+    <nav>
+      <ul>
+        <li><a href="#">Edit</a></li>
+        <li><a href="#">Delete</a></li>
+      </ul>
+    </nav>
+  </section>
+{% endblock %}
+
+{% block aside %}
+  <aside class="ads-show-aside">
+    <h1>Photos</h1>
+
+    {% if ad.image %}
+      <ul class="photos">
+        <li class="photo">
+          <a href="{{ ad.image.url }}" data-lightbox="roadtrip">
+            <img src="{{ ad.image.url }}" alt="{{ ad.title }}">
+          </a>
+        </li>
+        <li class="photo">
+          <a href="{{ ad.image.url }}" data-lightbox="roadtrip">
+            <img src="{{ ad.image.url }}" alt="{{ ad.title }}">
+          </a>
+        </li>
+      </ul>
+    {% else %}
+      <p>This ad has no associated photos.</p>
+    {% endif %}
+  </aside>
+{% endblock %}

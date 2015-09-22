@@ -2,8 +2,13 @@
 
 {% block title %}{{ block.super }}About{% endblock %}
 
+{% block breadcrumbs %}
+  {{ block.super }}
+  <li><a href="{% url 'pages:about' %}">About</a></li>
+{% endblock %}
+
 {% block content %}
   <h1>About Us</h1>
-  
+
   {% lorem 3 p %}
 {% endblock %}

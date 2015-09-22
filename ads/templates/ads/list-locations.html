@@ -1,0 +1,9 @@
+{% if locations %}
+  <ul>
+    {% for location in locations %}
+      <li><a href="#">{{ location.name }}</a></li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>There are no locations yet.</p>
+{% endif %}

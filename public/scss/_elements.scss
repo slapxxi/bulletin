@@ -12,6 +12,7 @@ a.fa {
 .site-header {
   #{$links} {
     color: $grey-light;
+    text-decoration: none;
   }
 
   a.active,
@@ -22,12 +23,40 @@ a.fa {
 
 
 .site-nav {
-  @include reset-list;
+  @include nav-list;
+}
 
-  > li {
-    display: inline-block;
-    vertical-align: sub;
-    margin-left: 0.8em;
+
+.site-nav-breadcrumbs {
+  font-size: 0.9rem;
+
+  ul {
+    @include nav-list;
+
+    li {
+      border: 0;
+      padding: 0;
+    }
+
+    li:after {
+      content: " >";
+      margin-left: 0.3rem;
+      margin-right: 0.3rem;
+      color: $blue;
+    }
+
+    li:last-child:after {
+      content: " ";
+    }
+  }
+
+  #{$links} {
+    color: $blue;
+  }
+
+  #{$links-active} {
+    text-decoration: none;
+    color: $grey-light;
   }
 }
 

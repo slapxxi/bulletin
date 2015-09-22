@@ -26,15 +26,15 @@ class UserCreationForm(forms.ModelForm):
     password = self.cleaned_data.get("password")
     password_confirmation = self.cleaned_data.get("password_confirmation")
     if password and password_confirmation and password != password_confirmation:
-        raise forms.ValidationError(
-            self.error_messages['password_mismatch'],
-            code='password_mismatch',
-        )
+      raise forms.ValidationError(
+        self.error_messages['password_mismatch'],
+        code='password_mismatch',
+      )
     return password_confirmation
 
   def save(self, commit=True):
     user = super().save(commit=False)
     user.set_password(self.cleaned_data["password"])
     if commit:
-        user.save()
+      user.save()
     return user

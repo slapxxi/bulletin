@@ -1,4 +1,5 @@
 exports.config =
+  # Config to compile static files from bower_components
   paths:
     public: 'static'
     watched: ['public', 'vendor']

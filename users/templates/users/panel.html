@@ -1,16 +1,11 @@
 <nav class="users-panel" role="navigation">
+  <ul>
   {% if user.is_authenticated %}
-    <span class="fa fa-user">
-      <a href="{% url 'users:user' user.id %}">{{ user.username }}</a>
-    </span>
-    |
-    <a href="{% url 'users:logout' %}?next=/"
-			 data-confirm="Are you sure you want to log out?">
-			 logout
-	  </a>
+    <li><a href="{% url 'users:user' user.id %}">{{ user.username|title }}</a></li>
+    <li><a href="{% url 'users:logout' %}" data-confirm="Are you sure you want to log out?">Logout</a></li>
   {% else %}
-    <a href="{% url 'users:login' %}">Login</a>
-    <strong>or</strong>
-    <a href="{% url 'users:register' %}">Register</a>
+    <li><a href="{% url 'users:login' %}">Login</a></li>
+    <li><a href="{% url 'users:login' %}">Register</a></li>
   {% endif %}
+  </ul>
 </nav>

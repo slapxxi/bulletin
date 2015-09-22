@@ -1,0 +1,72 @@
+.ads-show {
+  header {
+    h1 {
+      margin-bottom: 0;
+    }
+
+    p {
+      margin-top: 0.5em;
+      font-size: 0.9em;
+      color: $grey-light;
+    }
+  }
+}
+
+.ads-show-aside {
+  .photos {
+    @include reset-list;
+
+    .photo {
+      @include span-columns(3 of 9);
+    }
+  }
+}
+
+.ads-list {
+  @include reset-list;
+  @include clearfix;
+}
+
+.ads-ad {
+  @include span-columns(8 of 8);
+  position: relative;
+  min-height: 15em;
+  margin-bottom: 3em;
+
+  header {
+    h2 {
+      margin-bottom: 0;
+    }
+
+    p {
+      margin-top: 0.5em;
+      font-size: 0.9em;
+      color: $grey-light;
+    }
+  }
+
+  p {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+
+  .price {
+    float: right;
+    margin-top: -2.5em;
+    font-size: 2em;
+  }
+
+  .description {
+    @include span-columns(5 of 8);
+    @include omega;
+  }
+
+  .image {
+    @include span-columns(3 of 8);
+  }
+
+  .proceed {
+    @include span-columns(8 of 8);
+    > a { @include button; }
+  }
+}

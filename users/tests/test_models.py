@@ -6,6 +6,7 @@ from users.models import User
 class UserTest(TestCase):
   # TODO: Add contact information.
   # TODO: Email should be unique.
+  # TODO: Add price.
   def setUp(self):
     self.user = User.objects.create()
 

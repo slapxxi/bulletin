@@ -26,6 +26,16 @@
 
 <body>
 	<header class="site-header">
+		<nav class="site-nav-secondary">
+			{% include "users/panel.html" %}
+
+	    <form action="#" class="site-search" role="search">
+	    	<input type="search" placeholder="Ads you're looking for...">
+				<button type="submit"><span class="fa fa-search"></span></button>
+	    </form>
+		</nav>
+		{# end of .site-subnav#}
+
 		<nav class="site-nav-main">
 			<h1 class="site-logo">
 				<a href="{% url 'pages:index' %}">Bulletin</a>
@@ -39,18 +49,15 @@
 		</nav>
 		{# end of .site-nav#}
 
-		<nav class="site-nav-secondary">
-			{% include "users/panel.html" %}
-
-	    <form action="#" class="site-search" role="search">
-	    	<input type="search" placeholder="Ads you're looking for...">
-				<button type="submit"><span class="fa fa-search"></span></button>
-	    </form>
+		<nav class="site-nav-breadcrumbs">
+			<ul>
+			{% block breadcrumbs %}
+				<li><a href="{% url 'pages:index' %}">Bulletin</a></li>
+			{% endblock %}
+			</ul>
 		</nav>
-		{# end of .site-subnav#}
 	</header>
 	{# end of .site-header #}
-
 
 	<section class="site-content">
 		<div class="site-content-main">
@@ -59,8 +66,10 @@
 		</div>
 
 		<div class="site-content-aside">
-			<h1>Aside</h1>
-			{% lorem 3 p %}
+			{% block aside %}
+				<h1>Aside</h1>
+				{% lorem 3 p %}
+			{% endblock %}
 		</div>
 	</section>
 	{# end of .site-content #}

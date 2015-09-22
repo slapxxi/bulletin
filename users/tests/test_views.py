@@ -10,7 +10,7 @@ from users.forms import  UserCreationForm
 
 class RegisterTest(TestCase):
   def setUp(self):
-    self.user = create_user('user', 'password')
+    self.user = _create_user('user', 'password')
     self.valid_user_data = {
       'username': 'slava',
       'email': 'user@mail.com',
@@ -32,16 +32,13 @@ class RegisterTest(TestCase):
     self.assertRedirects(response, 'user/2/', target_status_code=302)
 
   def test_missing_email(self):
-    data = {
-      'username': 'slava',
-      'password': 'password',
-      'password_confirmation': 'password',
-    }
-    response = self.client.post(reverse('users:register'), data=data)
+    self.valid_user_data.pop('email')
+    invalid_data = self.valid_user_data
+    response = self.client.post(reverse('users:register'), data=invalid_data)
     self.assertContains(response, 'Email is required.')
 
 
-def create_user(name, password):
+def _create_user(name, password):
   user = User(username=name)
   user.set_password(password)
   user.save()

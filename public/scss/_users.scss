@@ -1,9 +1,8 @@
 .users-panel {
-  @include border-radius(5px);
-  color: $grey-light;
-
-  a:hover {
-    text-decoration: none;
+  font-size: 0.9em;
+  
+  ul {
+    @include nav-list;
   }
 }
 

@@ -1,0 +1,25 @@
+{% for ad in ads %}
+  <ul class="ads-list">
+    <li class="ads-ad">
+      <header>
+        <h2><a href="{% url 'ads:show' ad.id %}">{{ ad.title|title }}</a></h2>
+        <p>
+          <time>Published at {{ ad.published_at|date }}</time>
+          by <a href="{% url 'users:user' ad.author.id %}">
+            {{ ad.author.username }}
+          </a>
+        </p>
+        <p class="price"><strong>{{ ad.price }}</strong></p>
+      </header>
+
+      {% if ad.image %}
+      <p class="image"><img src="{{ ad.image.url}}" alt=""></p>
+      {% endif %}
+
+      <p class="description">{{ ad.description }}</p>
+      <p class="proceed"><a href="{% url 'ads:show' ad.id %}">Learn More</a></p>
+    </li>
+  </ul>
+{% empty %}
+  <p>There are no advertisements yet.</p>
+{% endfor %}
