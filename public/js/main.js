@@ -1,4 +1,12 @@
 $(document).ready(function() {
+    // Configure plugins
+    lightbox.option({
+      'resizeDuration': 300,
+      'fadeDuration': 200,
+      'wrapAround': true,
+      'alwaysShowNavOnTouchDevices': true,
+    })
+
     // var source = document.getElementById('elm-lang');
     // Elm.embed(Elm.Main, source);
     $('[data-confirm]').on('click', require_confirmation);
@@ -18,12 +26,11 @@ $(document).ready(function() {
 
 
 function require_confirmation(event) {
-    $link = $(event.currentTarget);
-    result = confirm($link.attr('data-confirm'));
-    if (result) return true
+    var $link = $(event.currentTarget);
+    var result = confirm($link.attr('data-confirm'));
+    if (result) return true;
     return event.preventDefault();
 }
-
 
 function make_link_active(link) {
     $link = $(link);
@@ -32,7 +39,6 @@ function make_link_active(link) {
         $link.addClass('active');
     }
 }
-
 
 function current_url() {
     return window.location.pathname;
