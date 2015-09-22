@@ -1,27 +1,16 @@
 from django.core.urlresolvers import reverse
-from django.test import TestCase
 from django.template.loader import render_to_string
 from django.contrib.auth import authenticate
 
-from .models import User
+from django.test import TestCase
 
-
-class UserTest(TestCase):
-  # TODO: Add contact information.
-  # TODO: Email should be unique.
-  def setUp(self):
-    self.user = User.objects.create()
-
-  def test_get_absolute_url(self):
-    url = self.user.get_absolute_url()
-    self.assertEqual(url, '/user/1/')
+from users.models import User
+from users.forms import  UserCreationForm
 
 
 class RegisterTest(TestCase):
   def setUp(self):
-    self.user = User.objects.create(username='user')
-    self.user.set_password('password')
-    self.user.save()
+    self.user = create_user('user', 'password')
     self.valid_user_data = {
       'username': 'slava',
       'email': 'user@mail.com',
@@ -29,7 +18,6 @@ class RegisterTest(TestCase):
       'password_confirmation': 'password',
     }
 
-  # TODO: Redirect to user profile if authenticated.
   def test_visitors_can_register(self):
     response = self.client.get(reverse('users:register'))
     self.assertTemplateUsed(response, 'users/register.html')
@@ -51,3 +39,10 @@ class RegisterTest(TestCase):
     }
     response = self.client.post(reverse('users:register'), data=data)
     self.assertContains(response, 'Email is required.')
+
+
+def create_user(name, password):
+  user = User(username=name)
+  user.set_password(password)
+  user.save()
+  return user

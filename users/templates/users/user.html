@@ -2,14 +2,26 @@
 
 {% block title %}
 {{ block.super }}
-{{ user.username }}'s Profile
+User |
+{{ user.username }}
 {% endblock %}
 
 {% block content %}
   <section>
     <h1>{{ user.username|title }}'s Profile</h1>
 
-    <p>{{ user.username|title }} has no ads yet.</p>
-    <p><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+    {% if user.ad_set.all %}
+      <ul>
+      {% for ad in user.ad_set.all %}
+        <li><a href="{% url 'ads:show' ad.id %}">{{ ad.title|title }}</a>
+      {% endfor %}
+      </ul>
+    {% else %}
+      {{ user.username|title }} has no advertisements yet.
+    {% endif %}
+
+    <p>
+      <a href="{% url 'ads:new' %}">New Advertisement</a>
+    </p>
   </section>
 {% endblock %}

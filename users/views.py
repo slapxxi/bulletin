@@ -17,6 +17,6 @@ def user(request, id):
 class Register(CreateView):
   template_name = 'users/register.html'
   form_class = UserCreationForm
-  
+
   get = method_decorator(anonymous_required)(CreateView.get)
   post = method_decorator(anonymous_required)(CreateView.post)
