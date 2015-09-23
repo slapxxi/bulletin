@@ -4,6 +4,11 @@
 {{ block.super }} Ads | Locations
 {% endblock %}
 
+{% block breadcrumbs %}
+  {{ block.super }}
+  <li><a href="{{ request.path }}">Locations</a></li>
+{% endblock %}
+
 {% block content %}
   <section>
     <h1>Locations</h1>

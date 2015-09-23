@@ -26,22 +26,26 @@
 
 <body>
 	<header class="site-header">
-		<nav class="site-nav-secondary">
-			{% include "users/user-panel.html" %}
+		<h1 class="site-logo">
+			<a href="{% url 'pages:index' %}">Bulletin</a>
+		</h1>
 
-	    <form action="#" class="site-search" role="search">
-	    	<input type="search" placeholder="Ads you're looking for...">
-				<button type="submit"><span class="fa fa-search"></span></button>
-	    </form>
+
+    <form action="#" class="site-search" role="search">
+    	<input type="search" placeholder="Ads you're looking for...">
+			<button type="submit"><span class="fa fa-search"></span></button>
+    </form>
+
+		<nav class="site-breadcrumbs">
+			<ul>
+			{% block breadcrumbs %}
+				<li><a href="{% url 'pages:index' %}">Home</a></li>
+			{% endblock %}
+			</ul>
 		</nav>
-		{# end of .site-subnav#}
 
-		<nav class="site-nav-main">
-			<h1 class="site-logo">
-				<a href="{% url 'pages:index' %}">Bulletin</a>
-			</h1>
-
-			<ul class="site-nav">
+		<nav class="site-nav">
+			<ul>
 				<li>
 					<a href="{% url 'ads:index' %}"
 						 class="fa fa-folder">&nbsp; Ads</a>
@@ -56,43 +60,42 @@
 				</li>
 			</ul>
 		</nav>
-		{# end of .site-nav#}
 
-		<nav class="site-nav-breadcrumbs">
-			<ul>
-			{% block breadcrumbs %}
-				<li><a href="{% url 'pages:index' %}">Bulletin</a></li>
-			{% endblock %}
-			</ul>
-		</nav>
+		{% include "users/user-panel.html" %}
 	</header>
-	{# end of .site-header #}
 
-	<section class="site-content">
-		<div class="site-content-main">
+
+	<div class="site-main">
+		<section class="site-content">
 			{% block content %}
 			{% endblock %}
-		</div>
+		</section>
+		{# end of .site-content #}
 
-		<div class="site-content-aside">
-			{% block aside %}
+
+		<aside class="site-sidebar">
+			{% block sidebar %}
 				<h1>Aside</h1>
 				{% lorem 3 p %}
 			{% endblock %}
-		</div>
-	</section>
-	{# end of .site-content #}
+		</aside>
+	</div>
 
 
 	<footer class="site-footer">
+		<p>
+			<a href="{% url 'pages:about' %}"
+				 class="fa fa-hand-peace-o">&nbsp; About Us</a>
+		</p>
+		
 		<small class="site-copyright">
 			<time datetime="{% now 'Y-m-d' %}}">{% now 'Y' %}</time>
 			&copy;
-			<a href="https://github.com/slavapavlutin" rel="author external">Slava Pavlutin</a>
+			<a href="https://github.com/slavapavlutin"
+				 rel="author external">Slava Pavlutin</a>
 			&
-			<a href="https://github.com/funbek" rel="author external">Denis Radchenko</a>
-			|
-			<a href="{% url 'pages:about' %}" class="fa fa-hand-peace-o fa-2x">&nbsp;</a>
+			<a href="https://github.com/funbek"
+				 rel="author external">Denis Radchenko</a>
 		</small>
 	</footer>
 	{# end of .site-footer #}

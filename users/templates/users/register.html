@@ -2,6 +2,11 @@
 
 {% block title %}{{ block.super }}Register{% endblock %}
 
+{% block breadcrumbs %}
+  {{ block.super }}
+  <li><a href="{{ request.path }}">Register</a></li>
+{% endblock %}
+
 {% block content %}
   <section class="users-register">
     <h1>Register</h1>

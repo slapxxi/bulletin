@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 
+
 {% block title %}
   {{ block.super }}
   Advertisement |
   {{ ad.title }}
 {% endblock %}
+
 
 {% block breadcrumbs %}
   {{ block.super }}
@@ -12,53 +14,57 @@
   <li><a href="{% url 'ads:show' ad.id %}">"{{ ad.title }}"</a></li>
 {% endblock %}
 
+
 {% block content %}
-  <section class="ads-show ads-ad">
+  <article class="ads-show ads-ad">
     <header>
       <h1>{{ ad.title|title }}</h1>
-      <p>
+      <p class="price">{{ ad.price }}</p>
+      <p class="meta">
         Published at
         <time datetime="{{ ad.published_at }}">
           {{ ad.published_at|date:'d M Y' }}
         </time>
         by
-        <a href="{% url 'users:user' ad.author.id %}">{{ ad.author.username }}</a>
+        <a href="{% url 'users:user' ad.author.id %}">
+          {{ ad.author.username }}
+        </a>
       </p>
-      <p class="price">
-        {{ ad.price }}
-      </p>
+
+      <nav class="manage">
+        <ul>
+          <li><a href="#">Edit</a></li>
+          <li><a href="#" data-confirm="Are you sure you want to delete this ad?">Delete</a></li>
+        </ul>
+      </nav>
     </header>
 
+    <h2>Seller's Description</h2>
     <p>{{ ad.description }}</p>
 
-    <nav>
-      <ul>
-        <li><a href="#">Edit</a></li>
-        <li><a href="#">Delete</a></li>
-      </ul>
-    </nav>
-  </section>
+    <h2>Contact Info</h2>
+    <p>Contact information is not provided.</p>
+  </article>
 {% endblock %}
 
-{% block aside %}
-  <aside class="ads-show-aside">
-    <h1>Photos</h1>
 
-    {% if ad.image %}
-      <ul class="photos">
-        <li class="photo">
-          <a href="{{ ad.image.url }}" data-lightbox="roadtrip">
-            <img src="{{ ad.image.url }}" alt="{{ ad.title }}">
-          </a>
-        </li>
-        <li class="photo">
-          <a href="{{ ad.image.url }}" data-lightbox="roadtrip">
-            <img src="{{ ad.image.url }}" alt="{{ ad.title }}">
-          </a>
-        </li>
-      </ul>
-    {% else %}
-      <p>This ad has no associated photos.</p>
-    {% endif %}
-  </aside>
+{% block sidebar %}
+  <h1>Photos</h1>
+
+  {% if ad.image %}
+    <ul class="ads-photos">
+      <li class="photo">
+        <a href="{{ ad.image.url }}" data-lightbox="roadtrip">
+          <img src="{{ ad.image.url }}" alt="{{ ad.title }}">
+        </a>
+      </li>
+      <li class="photo">
+        <a href="{{ ad.image.url }}" data-lightbox="roadtrip">
+          <img src="{{ ad.image.url }}" alt="{{ ad.title }}">
+        </a>
+      </li>
+    </ul>
+  {% else %}
+    <p>This ad has no associated photos.</p>
+  {% endif %}
 {% endblock %}

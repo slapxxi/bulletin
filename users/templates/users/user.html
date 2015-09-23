@@ -15,6 +15,7 @@ User |
   <section>
     <h1>{{ user.username|title }}'s Profile</h1>
 
+    <h2>Published Advertisements</h2>
     {% if user.ad_set.all %}
       <ul>
       {% for ad in user.ad_set.all %}
@@ -25,6 +26,7 @@ User |
       {{ user.username|title }} has no advertisements yet.
     {% endif %}
 
+    <h2>Manage</h2>
     <p>
       <a href="{% url 'ads:new' %}">New Advertisement</a>
     </p>

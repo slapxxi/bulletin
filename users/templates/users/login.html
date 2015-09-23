@@ -2,6 +2,11 @@
 
 {% block title %}{{ block.super }}Login{% endblock %}
 
+{% block breadcrumbs %}
+  {{ block.super }}
+  <li><a href="{{ request.path }}">Login</a></li>
+{% endblock %}
+
 {% block content %}
   <section class="users-login">
     <h1>Login</h1>

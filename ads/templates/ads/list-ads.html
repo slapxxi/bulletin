@@ -3,17 +3,17 @@
     <li class="ads-ad">
       <header>
         <h2><a href="{% url 'ads:show' ad.id %}">{{ ad.title|title }}</a></h2>
-        <p>
+        <div class="price">{{ ad.price }}</div>
+        <div class="meta">
           <time>Published at {{ ad.published_at|date }}</time>
           by <a href="{% url 'users:user' ad.author.id %}">
             {{ ad.author.username }}
           </a>
-        </p>
-        <p class="price"><strong>{{ ad.price }}</strong></p>
+        </div>
       </header>
 
       {% if ad.image %}
-      <p class="image"><img src="{{ ad.image.url}}" alt=""></p>
+      <div class="image"><img src="{{ ad.image.url}}" alt=""></div>
       {% endif %}
 
       <p class="description">{{ ad.description }}</p>

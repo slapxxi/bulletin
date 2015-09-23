@@ -23,30 +23,27 @@ a.fa {
 
 
 .site-nav {
-  @include nav-list;
+  ul {
+    @include nav-list;
+  }
 }
 
 
-.site-nav-breadcrumbs {
-  font-size: 0.9rem;
-
+.site-breadcrumbs {
   ul {
     @include nav-list;
-
-    li {
-      border: 0;
-      padding: 0;
-    }
+    margin: 0;
 
     li:after {
+      display: inline-block;
       content: " >";
-      margin-left: 0.3rem;
-      margin-right: 0.3rem;
       color: $blue;
+      margin-left: 0.5em;
     }
 
     li:last-child:after {
-      content: " ";
+      content: "";
+      margin-left: 0;
     }
   }
 
@@ -62,10 +59,13 @@ a.fa {
 
 
 .site-search {
+  word-spacing: 0;
+
   input[type=search] {
     @include border-radius(5px 0 0 5px);
     @include box-shadow(none);
     border-right: none;
+    margin-right: -1em;
   }
 
   button[type=submit] {

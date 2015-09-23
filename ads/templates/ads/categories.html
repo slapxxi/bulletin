@@ -4,6 +4,11 @@
 {{ block.super }} Ads | Categories
 {% endblock %}
 
+{% block breadcrumbs %}
+  {{ block.super }}
+  <li><a href="{{ request.path }}">Categories</a></li>
+{% endblock %}
+
 {% block content %}
   <section>
     <h1>Categories</h1>

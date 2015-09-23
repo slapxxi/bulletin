@@ -7,7 +7,7 @@
 
 {% block breadcrumbs %}
   {{ block.super }}
-  <li><a href="{% url 'ads:index' %}">Advertisements</a></li>
+  <li><a href="{{ request.path }}">Advertisements</a></li>
 {% endblock %}
 
 
