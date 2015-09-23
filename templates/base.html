@@ -42,9 +42,18 @@
 			</h1>
 
 			<ul class="site-nav">
-				<li><a href="{% url 'ads:index' %}" class="fa fa-folder">&nbsp; Ads</a></li>
-				<li><a href="{% url 'ads:categories' %}">Categories</a></li>
-				<li><a href="{% url 'ads:locations' %}">Locations</a></li>
+				<li>
+					<a href="{% url 'ads:index' %}"
+						 class="fa fa-folder">&nbsp; Ads</a>
+				</li>
+				<li>
+					<a href="{% url 'ads:categories' %}"
+				  	 class="fa fa-list-ul">&nbsp; Categories</a>
+				</li>
+				<li>
+					<a href="{% url 'ads:locations' %}"
+					   class="fa fa-compass">&nbsp; Locations</a>
+				</li>
 			</ul>
 		</nav>
 		{# end of .site-nav#}
