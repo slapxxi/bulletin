@@ -18,7 +18,7 @@ class RegisterTest(TestCase):
       'password_confirmation': 'password',
     }
 
-  def test_visitors_can_register(self):
+  def test_correct_template_used(self):
     response = self.client.get(reverse('users:register'))
     self.assertTemplateUsed(response, 'users/register.html')
 
