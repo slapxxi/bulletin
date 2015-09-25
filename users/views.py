@@ -1,7 +1,9 @@
 from django.shortcuts import redirect, render, get_object_or_404
-from django.views.generic import View, CreateView
+from django.views.generic import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+
+from utils.shortcuts import create_or_render
 
 from .decorators import anonymous_required
 from .models import User
@@ -18,16 +20,8 @@ class Register(View):
   @method_decorator(anonymous_required)
   def get(self, request):
     form = UserCreationForm()
-    return self.render(request, {'form': form})
+    return render(request, 'users/register.html', {'form': form})
 
   @method_decorator(anonymous_required)
   def post(self, request):
-    form = UserCreationForm(request.POST)
-    if form.is_valid():
-      user = form.save()
-      return redirect(user)
-    else:
-      return self.render(request, {'form': form})
-
-  def render(self, request, context):
-    return render(request, 'users/register.html', context)
+    return create_or_render(request, 'users/register.html', UserCreationForm)

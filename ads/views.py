@@ -3,6 +3,8 @@ from django.views.generic import View
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
+from utils.shortcuts import create_or_render
+
 from .forms import AdForm
 from .models import Ad
 
@@ -20,21 +22,13 @@ def show(request, id):
 class CreateAd(View):
   @method_decorator(login_required(login_url='users:login'))
   def get(self, request):
-    return self.render(request)
+    form = AdForm()
+    return render(request, 'ads/new.html', {'form': form})
 
   @method_decorator(login_required(login_url='users:login'))
   def post(self, request):
     form = AdForm(request.POST, instance=Ad(author=request.user))
-    if form.is_valid():
-      ad = form.save()
-      return redirect(ad)
-    else:
-      return self.render(request, {'form': form})
-
-  def render(self, request, context=None):
-    if context is None:
-      context = {'form': AdForm()}
-    return render(request, 'ads/new.html', context)
+    return create_or_render(request, 'ads/new.html', form)
 
 
 def categories(request):
