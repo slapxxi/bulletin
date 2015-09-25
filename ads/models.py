@@ -8,6 +8,7 @@ from users.models import User
 
 
 class Ad(models.Model):
+  # TODO: Add ability to add a set of images.
   title        = models.CharField(max_length=120)
   description  = models.TextField(validators=[MinLengthValidator(60),])
   author       = models.ForeignKey(User)

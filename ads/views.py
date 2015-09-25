@@ -1,5 +1,7 @@
-from django.shortcuts import render, get_object_or_404
-from django.views.generic import CreateView
+from django.shortcuts import redirect, render, get_object_or_404
+from django.views.generic import View
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 from .forms import AdForm
 from .models import Ad
@@ -15,11 +17,24 @@ def show(request, id):
   return render(request, 'ads/show.html', {'ad': ad})
 
 
-class CreateAd(CreateView):
-  # TODO: Pass the current user's data to the form on POST.
-  # TODO: Require login.
-  template_name = 'ads/new.html'
-  form_class = AdForm
+class CreateAd(View):
+  @method_decorator(login_required(login_url='users:login'))
+  def get(self, request):
+    return self.render(request)
+
+  @method_decorator(login_required(login_url='users:login'))
+  def post(self, request):
+    form = AdForm(request.POST, instance=Ad(author=request.user))
+    if form.is_valid():
+      ad = form.save()
+      return redirect(ad)
+    else:
+      return self.render(request, {'form': form})
+
+  def render(self, request, context=None):
+    if context is None:
+      context = {'form': AdForm()}
+    return render(request, 'ads/new.html', context)
 
 
 def categories(request):

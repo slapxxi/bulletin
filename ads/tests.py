@@ -1,16 +1,20 @@
 from django.test import TestCase
+from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
 
 from .models import Ad
+from .forms import AdForm
 from users.models import User
 
 
+# TODO: Deleting advertisement.
+# TODO: Updating advertisement.
 class AdTest(TestCase):
   def setUp(self):
     self.valid_ad_data = {
       'title': 'Advertisement',
       'price': 100,
-      'description': '*'*60,
+      'description': '*'*61,
       'author': User.objects.create(),
     }
 
@@ -22,5 +26,31 @@ class AdTest(TestCase):
       ad_with_negative_price.full_clean()
 
 
-# TODO: Deleting instances
-# TODO: Updating instances
+class CreateAdTest(TestCase):
+  def setUp(self):
+    self.user = _create_user('user', 'password')
+    self.client.login(username=self.user.username, password='password')
+    self.valid_data = {
+      'title': 'Test Advertisement',
+      'description': '*'*60,
+      'price_0': '100.1',
+      'price_1': 'USD',
+    }
+
+  def test_author_set_automatically(self):
+    ad = AdForm(self.valid_data)
+    response = self.client.post(reverse('ads:new'), self.valid_data)
+    self.assertEqual(Ad.objects.count(), 1)
+    self.assertRedirects(response, 'ad/1/')
+
+  def test_login_required(self):
+    self.client.logout()
+    response = self.client.get(reverse('ads:new'))
+    self.assertRedirects(response, 'login/?next=/ads/new/')
+
+
+def _create_user(name, password):
+  user = User.objects.create(username=name)
+  user.set_password(password)
+  user.save()
+  return user
