@@ -31,12 +31,12 @@ class CreateAd(View):
     return create_or_render(request, 'ads/new.html', form)
 
 
-def categories(request):
-  return render(request, 'ads/categories.html')
-
-
-def locations(request):
-  return render(request, 'ads/locations.html')
-
+# def categories(request):
+#   return render(request, 'ads/categories.html')
+#
+#
+# def locations(request):
+#   return render(request, 'ads/locations.html')
+#
 # TODO: Add UpdateView
 # TODO: Add DeleteView

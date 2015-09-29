@@ -51,11 +51,11 @@
 						 class="fa fa-folder">&nbsp; Ads</a>
 				</li>
 				<li>
-					<a href="{% url 'ads:categories' %}"
+					<a href="{% url 'categories:index' %}"
 				  	 class="fa fa-list-ul">&nbsp; Categories</a>
 				</li>
 				<li>
-					<a href="{% url 'ads:locations' %}"
+					<a href="{% url 'categories:index' %}"
 					   class="fa fa-compass">&nbsp; Locations</a>
 				</li>
 			</ul>
@@ -87,7 +87,7 @@
 			<a href="{% url 'pages:about' %}"
 				 class="fa fa-hand-peace-o">&nbsp; About Us</a>
 		</p>
-		
+
 		<small class="site-copyright">
 			<time datetime="{% now 'Y-m-d' %}}">{% now 'Y' %}</time>
 			&copy;
