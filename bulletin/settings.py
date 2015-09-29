@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'users',
     'ads',
     'categories',
+    'locations',
 )
 
 MIDDLEWARE_CLASSES = (

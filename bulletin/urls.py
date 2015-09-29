@@ -8,6 +8,7 @@ import pages.urls
 import users.urls
 import ads.urls
 import categories.urls
+import locations.urls
 
 
 urlpatterns = [
@@ -15,5 +16,6 @@ urlpatterns = [
   url(r'^', include(users.urls, namespace='users')),
   url(r'^', include(ads.urls, namespace='ads')),
   url(r'^', include(categories.urls, namespace='categories')),
+  url(r'^', include(locations.urls, namespace='locations')),
   url(r'^admin/', include(admin.site.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
