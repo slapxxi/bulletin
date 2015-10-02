@@ -26,9 +26,13 @@ User |
       {{ user.username|title }} has no advertisements yet.
     {% endif %}
 
-    <h2>Manage</h2>
-    <p>
-      <a href="{% url 'ads:new' %}">New Advertisement</a>
-    </p>
+    {% if request.user.id == user.id %}
+      <h2>Manage</h2>
+      <ul>
+        <li>
+          <a href="{% url 'ads:new' %}">New Advertisement</a>
+        </li>
+      </ul>
+    {% endif %}
   </section>
 {% endblock %}
