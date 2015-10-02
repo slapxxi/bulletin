@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
@@ -25,6 +27,35 @@ class AdTest(TestCase):
     with self.assertRaises(ValidationError):
       ad_with_negative_price.full_clean()
 
+  def test_published_at_auto_created(self):
+    ad = Ad.objects.create(**self.valid_ad_data)
+    self.assertTrue(isinstance(ad.published_at, datetime))
+
+
+class AdFormTest(TestCase):
+  def setUp(self):
+    user = User.objects.create(username='slava')
+    self.data = {
+      'title': 'Advertisement',
+      'price': 100,
+      'description': '*'*61,
+      'author': User.objects.create(),
+    }
+    self.form_data = {
+      'title': 'Advertisement',
+      'price_0': 100,
+      'price_1': 'RUB',
+      'description': '*'*61,
+      'author': user,
+    }
+    self.instance = Ad.objects.create(**self.data)
+
+  def test_published_at_not_updated(self):
+    published_at = self.instance.published_at
+    form = AdForm(self.form_data, instance=self.instance)
+    form.save()
+    self.assertEquals(form.instance.published_at, published_at)
+
 
 class CreateAdTest(TestCase):
   def setUp(self):
@@ -32,7 +63,7 @@ class CreateAdTest(TestCase):
     self.client.login(username=self.user.username, password='password')
     self.valid_data = {
       'title': 'Test Advertisement',
-      'description': '*'*60,
+      'description': '*'*61,
       'price_0': '100.1',
       'price_1': 'USD',
     }
