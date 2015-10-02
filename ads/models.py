@@ -19,3 +19,6 @@ class Ad(models.Model):
 
   def get_absolute_url(self):
     return reverse('ads:show', args=(self.id,))
+
+  def is_author(self, user):
+    return user.id == self.author.id

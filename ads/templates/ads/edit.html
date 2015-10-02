@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ block.super }}
+Advertisements | {{ form.instance.title }} | Edit
+{% endblock %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li><a href="{% url 'ads:index' %}">Advertisements</a></li>
+<li><a href="{% url 'ads:show' form.instance.id %}">{{ form.instance.title }}</a></li>
+<li><a href="{{ request.path }}">Edit</a></li>
+{% endblock %}
+
+{% block content %}
+  <h1>Edit "{{ form.instance.title }}"</h1>
+
+  <form action="{% url 'ads:edit' form.instance.id %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Update Advertisement">
+  </form>
+{% endblock %}

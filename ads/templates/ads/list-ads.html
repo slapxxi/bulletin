@@ -2,7 +2,7 @@
   <ul class="ads-list">
     <li class="ads-ad">
       <header>
-        <h2><a href="{% url 'ads:show' ad.id %}">{{ ad.title|title }}</a></h2>
+        <h2><a href="{% url 'ads:show' ad.id %}">{{ ad.title }}</a></h2>
         <div class="price">{{ ad.price }}</div>
         <div class="meta">
           <time>Published at {{ ad.published_at|date }}</time>

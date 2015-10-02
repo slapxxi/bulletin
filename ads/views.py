@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 from utils.shortcuts import create_or_render
 
+from .decorators import author_required
 from .forms import AdForm
 from .models import Ad
 
@@ -31,12 +32,16 @@ class CreateAd(View):
     return create_or_render(request, 'ads/new.html', form)
 
 
-# def categories(request):
-#   return render(request, 'ads/categories.html')
-#
-#
-# def locations(request):
-#   return render(request, 'ads/locations.html')
-#
-# TODO: Add UpdateView
+class EditAd(View):
+  @method_decorator(author_required)
+  def get(self, request, ad):
+    form = AdForm(instance=ad)
+    return render(request, 'ads/edit.html', {'form': form})
+
+  @method_decorator(author_required)
+  def post(self, request, ad):
+    form = AdForm(request.POST, instance=ad)
+    return create_or_render(request, 'ads/show.html', form)
+
+
 # TODO: Add DeleteView

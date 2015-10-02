@@ -18,15 +18,15 @@
   </section>
 {% endblock %}
 
-
-{% block aside %}
+{% block sidebar %}
+  {# TODO: Embed categories and locations data #}
   <section class="categories">
     <h1>Categories</h1>
-    {% include "ads/list-categories.html" %}
+    {% include "categories/list-categories.html" %}
   </section>
 
   <section class="locations">
     <h1>Locations</h1>
-    {% include "ads/list-categories.html" %}
+    {% include "locations/list-locations.html" %}
   </section>
 {% endblock %}

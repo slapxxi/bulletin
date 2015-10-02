@@ -11,14 +11,14 @@
 {% block breadcrumbs %}
   {{ block.super }}
   <li><a href="{% url 'ads:index' %}">Advertisements</a></li>
-  <li><a href="{% url 'ads:show' ad.id %}">"{{ ad.title }}"</a></li>
+  <li><a href="{{ request.path }}">{{ ad.title }}</a></li>
 {% endblock %}
 
 
 {% block content %}
   <article class="ads-show ads-ad">
     <header>
-      <h1>{{ ad.title|title }}</h1>
+      <h1>{{ ad.title }}</h1>
       <p class="price">{{ ad.price }}</p>
       <p class="meta">
         Published at
@@ -31,12 +31,13 @@
         </a>
       </p>
 
-      <nav class="manage">
-        <ul>
-          <li><a href="#">Edit</a></li>
-          <li><a href="#" data-confirm="Are you sure you want to delete this ad?">Delete</a></li>
-        </ul>
-      </nav>
+      {% if ad.author.id == request.user.id %}
+        <nav class="manage">
+          <ul>
+            <li><a href="{% url 'ads:edit' ad.id %}">Edit</a></li>
+          </ul>
+        </nav>
+      {% endif %}
     </header>
 
     <h2>Seller's Description</h2>
