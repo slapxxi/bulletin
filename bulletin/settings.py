@@ -70,6 +70,9 @@ TEMPLATES = [
                 'django.template.context_processors.media',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # Internal context processors
+                'categories.context_processors.categories',
+                'locations.context_processors.locations',
             ],
         },
     },
