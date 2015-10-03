@@ -20,6 +20,12 @@ def show(request, id):
   return render(request, 'ads/show.html', {'ad': ad})
 
 
+@author_required
+def delete(request, instance):
+  instance.delete()
+  return redirect('ads:index')
+
+
 class CreateAd(View):
   @method_decorator(login_required(login_url='users:login'))
   def get(self, request):

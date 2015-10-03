@@ -9,8 +9,6 @@ from .forms import AdForm
 from users.models import User
 
 
-# TODO: Deleting advertisement.
-# TODO: Updating advertisement.
 class AdTest(TestCase):
   def setUp(self):
     self.valid_ad_data = {
@@ -30,6 +28,17 @@ class AdTest(TestCase):
   def test_published_at_auto_created(self):
     ad = Ad.objects.create(**self.valid_ad_data)
     self.assertTrue(isinstance(ad.published_at, datetime))
+
+
+class DeleteAdTest(TestCase):
+  def setUp(self):
+    self.user = _create_user('user', 'password')
+    self.ad = _create_ad('Sample Ad', self.user)
+
+  def test_deleting_ad(self):
+    self.client.login(username=self.user.username, password='password')
+    response = self.client.get(reverse('ads:delete', args=[self.ad.id]))
+    self.assertRedirects(response, reverse('ads:index'))
 
 
 class AdFormTest(TestCase):
@@ -79,6 +88,10 @@ class CreateAdTest(TestCase):
     response = self.client.get(reverse('ads:new'))
     self.assertRedirects(response, 'login/?next=/ads/new/')
 
+
+def _create_ad(title, user):
+  ad = Ad.objects.create(title=title, author=user)
+  return ad
 
 def _create_user(name, password):
   user = User.objects.create(username=name)
