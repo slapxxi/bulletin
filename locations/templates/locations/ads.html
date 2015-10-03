@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {{ block.super}}
+  Locations | {{ location.name }}
+{% endblock %}
+
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  <li><a href="{% url 'locations:index' %}">Locations</a></li>
+  <li><a href="{{ request.path }}">{{ location.name }}</a></li>
+{% endblock %}
+
+
+{% block content %}
+  <section>
+    <h1>Advertisements in {{ location.name }}</h1>
+    {% include "ads/list-ads.html" %}
+  </section>
+{% endblock %}

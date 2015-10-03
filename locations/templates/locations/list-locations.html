@@ -1,7 +1,11 @@
 {% if locations %}
   <ul>
     {% for location in locations %}
-      <li><a href="#">{{ location.name }}</a></li>
+      <li>
+        <a href="{% url 'locations:ads' location.slug %}">
+          {{ location.name }}
+        </a>
+      </li>
     {% endfor %}
   </ul>
 {% else %}
