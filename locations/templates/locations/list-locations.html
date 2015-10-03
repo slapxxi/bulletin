@@ -5,6 +5,9 @@
         <a href="{% url 'locations:ads' location.slug %}">
           {{ location.name }}
         </a>
+        {% with location.ad_set.count as ad_count %}
+          has {{ location.ad_set.count }} advertisement{{ location.ad_set.count|pluralize}}.
+        {% endwith %}
       </li>
     {% endfor %}
   </ul>

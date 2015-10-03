@@ -37,6 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Third-party apps
+    'django_nose',
     # Internal apps
     'pages',
     'users',
@@ -123,9 +125,10 @@ ABSOLUTE_URL_OVERRIDES = {
 
 AUTH_USER_MODEL = 'users.User'
 
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-
+# django-money config
 CURRENCIES = ('USD', 'RUB')
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'

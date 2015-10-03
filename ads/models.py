@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.timezone import now
+from django.utils import timezone
 from django.core.validators import MinLengthValidator, MinValueValidator
 from django.core.urlresolvers import reverse
 
@@ -24,7 +24,7 @@ class Ad(models.Model):
 
   def save(self, *args, **kwargs):
     if self.is_new():
-      self.published_at = now()
+      self.published_at = timezone.now()
     return super().save(*args, **kwargs)
 
   def get_absolute_url(self):

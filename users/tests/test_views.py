@@ -1,11 +1,7 @@
-from django.core.urlresolvers import reverse
-from django.template.loader import render_to_string
-from django.contrib.auth import authenticate
-
 from django.test import TestCase
+from django.core.urlresolvers import reverse
 
 from users.models import User
-from users.forms import  UserCreationForm
 
 
 class RegisterTest(TestCase):
