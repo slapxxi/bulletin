@@ -18,13 +18,11 @@ class Ad(models.Model):
   location     = models.ForeignKey(Location, blank=True, null=True)
   categories   = models.ManyToManyField(Category)
   image        = models.ImageField(upload_to='img', blank=True)
-  published_at = models.DateTimeField()
+  published_at = models.DateTimeField(auto_now_add=True)
   price        = MoneyField(max_digits=10, decimal_places=2,
                  default_currency='RUB', validators=[MinValueValidator(0.01)])
 
   def save(self, *args, **kwargs):
-    if self.is_new():
-      self.published_at = timezone.now()
     return super().save(*args, **kwargs)
 
   def get_absolute_url(self):
@@ -32,6 +30,3 @@ class Ad(models.Model):
 
   def is_author(self, user):
     return user.id == self.author.id
-
-  def is_new(self):
-    return self.id is None
