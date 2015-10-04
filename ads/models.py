@@ -22,9 +22,6 @@ class Ad(models.Model):
   price        = MoneyField(max_digits=10, decimal_places=2,
                  default_currency='RUB', validators=[MinValueValidator(0.01)])
 
-  def save(self, *args, **kwargs):
-    return super().save(*args, **kwargs)
-
   def get_absolute_url(self):
     return reverse('ads:show', args=(self.id,))
 
