@@ -15,7 +15,7 @@ class Ad(models.Model):
   title        = models.CharField(max_length=120)
   description  = models.TextField(validators=[MinLengthValidator(60),])
   author       = models.ForeignKey(User)
-  location     = models.ForeignKey(Location, null=True)
+  location     = models.ForeignKey(Location, blank=True, null=True)
   categories   = models.ManyToManyField(Category)
   image        = models.ImageField(upload_to='img', blank=True)
   published_at = models.DateTimeField()

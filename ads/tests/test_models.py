@@ -19,17 +19,11 @@ def auto_created():
 
 
 @with_setup(create_user, destroy_user)
-@test("Published_at can't be updated after creating.")
-def dont_update():
-  ad = Ad.objects.create(author=user())
-  published_at = ad.published_at
-  ad.published_at = timezone.now()
-  ok_(ad.published_at)
-
-
-@with_setup(create_user, destroy_user)
 @raises(ValidationError)
 @test("Price can't be lower than required.")
 def price_validation():
-  ad = Ad.objects.create(author=user())
-  ad.full_clean()
+  ad = Ad.objects.create(title='test',
+                         author=user(),
+                         description='*'*61,
+                         price=-1)
+  ad.clean_fields()

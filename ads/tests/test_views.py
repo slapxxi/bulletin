@@ -20,7 +20,7 @@ def create_client():
 @with_setup(teardown=destroy_users)
 @test("Author is set automatically on save.")
 def set_author(client, user):
-  print(client.login(username=user.username, password='password'))
+  client.login(username=user.username, password='password')
   response = client.post(reverse('ads:new'), data={
     'title': 'new title',
     'description': '*'*61,
