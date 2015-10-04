@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
 from utils.decorators import test, use
-from users.tests.setup import create_user, destroy_user, user, destroy_users
+from users.tests.setup import create_user, destroy_users
 
 from ads.models import Ad
 
@@ -32,7 +32,7 @@ def set_author(client, user):
 
 
 @use(create_client, create_user)
-@with_setup(destroy_users)
+@with_setup(teardown=destroy_users)
 @test("Delete via HTTP.")
 def delete_ad(client, user):
   client.login(username=user.username, password='password')
@@ -42,7 +42,6 @@ def delete_ad(client, user):
 
 
 @use(create_client)
-@with_setup(destroy_users)
 @test("Loging required in order to create ads.")
 def login_required(client):
   response = client.get(reverse('ads:new'))
