@@ -6,7 +6,7 @@ from django.test import Client
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
-from utils.decorators import test, use
+from utils.decorators import use, teardown
 from users.tests.setup import create_user, destroy_users
 
 from ads.models import Ad
@@ -17,9 +17,9 @@ def create_client():
 
 
 @use(create_client, create_user)
-@with_setup(teardown=destroy_users)
-@test("Author is set automatically on save.")
-def set_author(client, user):
+@teardown(destroy_users)
+def test_auto_author(client, user):
+  "Author is set automatically."
   client.login(username=user.username, password='password')
   response = client.post(reverse('ads:new'), data={
     'title': 'new title',
@@ -32,9 +32,9 @@ def set_author(client, user):
 
 
 @use(create_client, create_user)
-@with_setup(teardown=destroy_users)
-@test("Delete via HTTP.")
-def delete_ad(client, user):
+@teardown(destroy_users)
+def test_delete_ad(client, user):
+  "Deleting an ad via HTTP."
   client.login(username=user.username, password='password')
   ad = Ad.objects.create(author=user)
   response = client.get(reverse('ads:delete', args=[ad.id]))
@@ -42,7 +42,7 @@ def delete_ad(client, user):
 
 
 @use(create_client)
-@test("Loging required in order to create ads.")
-def login_required(client):
+def test_login_required(client):
+  "Login required in order to create an ad."
   response = client.get(reverse('ads:new'))
   ok_(isinstance(response, HttpResponseRedirect))

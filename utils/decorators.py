@@ -1,4 +1,5 @@
 from functools import wraps
+from nose import with_setup
 from nose.tools import nottest
 
 
@@ -12,16 +13,6 @@ def decorator(decorator_fn):
   return _decorator
 
 
-@nottest
-def test(description):
-  def _decorator(fn):
-    fn.__name__ = "blah_blah"
-    fn.__doc__  = description
-    fn.__test__ = True
-    return fn
-  return _decorator
-
-
 def use(*setups):
   def _decorator(fn):
     @wraps(fn)
@@ -30,3 +21,7 @@ def use(*setups):
       return fn(*setups_)
     return _decorated
   return _decorator
+
+
+def teardown(teardown_):
+  return with_setup(teardown=teardown_)

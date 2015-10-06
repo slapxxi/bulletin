@@ -27,3 +27,9 @@ class Ad(models.Model):
 
   def is_author(self, user):
     return user.id == self.author.id
+
+  def __str__(self):
+    return '"{}" by {}'.format(self.title, self.author)
+
+  def __repr__(self):
+    return '<Advertisement: "{}" by {}>'.format(self.title, self.author)

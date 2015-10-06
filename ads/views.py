@@ -21,21 +21,24 @@ def show(request, id):
 
 
 @author_required
-def delete(request, instance):
-  instance.delete()
+def delete(_request, advertisement):
+  advertisement.delete()
   return redirect('ads:index')
 
 
 class CreateAd(View):
+  template_name = 'ads/new.html'
+
   @method_decorator(login_required(login_url='users:login'))
   def get(self, request):
     form = AdForm()
-    return render(request, 'ads/new.html', {'form': form})
+    return render(request, self.template_name, {'form': form})
 
   @method_decorator(login_required(login_url='users:login'))
   def post(self, request):
-    form = AdForm(request.POST, instance=Ad(author=request.user))
-    return create_or_render(request, 'ads/new.html', form)
+    ad_with_author = Ad(author=request.user)
+    form = AdForm(request.POST, instance=ad_with_author)
+    return create_or_render(request, self.template_name, form)
 
 
 class EditAd(View):
@@ -48,6 +51,3 @@ class EditAd(View):
   def post(self, request, ad):
     form = AdForm(request.POST, instance=ad)
     return create_or_render(request, 'ads/show.html', form)
-
-
-# TODO: Add DeleteView

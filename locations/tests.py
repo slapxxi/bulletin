@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from nose import with_setup
 from nose.tools import eq_
 
-from utils.decorators import test, use
+from utils.decorators import use, teardown
 from ads.models import Ad
 from users.models import User
 from users.tests.setup import create_user
@@ -22,30 +22,30 @@ def destroy_locations():
 
 
 @use(create_location)
-@with_setup(teardown=destroy_locations)
-@test("Creating a location.")
+@teardown(destroy_locations)
 def test_create_a_location(location):
+  "Creating a location."
   eq_(Location.objects.count(), 1)
 
 
 @use(create_client)
-@test("Listing all locations.")
-def test_more(client):
+def test_all_locations(client):
+  "Listing all locations."
   response = client.get(reverse('locations:index'))
   eq_(response.status_code, 200)
 
 
 @use(create_location, create_client)
-@with_setup(teardown=destroy_locations)
-@test("Showing advertsisements associated with the location.")
+@teardown(destroy_locations)
 def test_even_more(location, client):
+  "Showing advertisement associated with a location."
   response = client.get(reverse('locations:ads', args=[location.slug]))
   eq_(response.status_code, 200)
 
 
 @use(create_user, create_location)
-@with_setup(teardown=destroy_locations)
-@test("Creating ad with location.")
+@teardown(destroy_locations)
 def test_rest(user, location):
+  "Creating an ad with a location."
   ad = Ad.objects.create(author=user, location=location)
   eq_(location.ad_set.first(), ad)

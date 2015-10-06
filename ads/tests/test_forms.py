@@ -6,17 +6,17 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.utils import timezone
 
-from utils.decorators import test, use
+from utils.decorators import use, teardown
 from users.tests.setup import create_user, destroy_users
 
 from ads.models import Ad
 from ads.forms import AdForm
 
 
-@with_setup(teardown=destroy_users)
 @use(create_user)
-@test("Published_at can't be updated after creating.")
-def dont_update(user):
+@teardown(destroy_users)
+def test_updating(user):
+  "Published_at can't be updated after creating."
   data = {'description': '*'*61, 'title': 'test', 'price_0': 100, 'price_1': 'USD'}
   form = AdForm(data, instance=Ad(author=user))
   ad = form.save()
