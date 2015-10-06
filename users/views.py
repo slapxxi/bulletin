@@ -3,9 +3,9 @@ from django.views.generic import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
+from braces.views import AnonymousRequiredMixin
 from utils.shortcuts import create_or_render
 
-from .decorators import anonymous_required
 from .models import User
 from .forms import UserCreationForm
 
@@ -16,12 +16,12 @@ def user(request, id):
   return render(request, 'users/user.html', {'user': user})
 
 
-class Register(View):
-  @method_decorator(anonymous_required)
+class Register(AnonymousRequiredMixin, View):
+  authenticated_redirect_url = '/'
+
   def get(self, request):
     form = UserCreationForm()
     return render(request, 'users/register.html', {'form': form})
 
-  @method_decorator(anonymous_required)
   def post(self, request):
     return create_or_render(request, 'users/register.html', UserCreationForm)
