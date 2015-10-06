@@ -3,6 +3,7 @@ from django.views.generic import View
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
+from braces.views import LoginRequiredMixin
 from utils.shortcuts import create_or_render
 
 from .decorators import author_required
@@ -26,15 +27,14 @@ def delete(_request, advertisement):
   return redirect('ads:index')
 
 
-class CreateAd(View):
+class CreateAd(LoginRequiredMixin, View):
   template_name = 'ads/new.html'
+  login_url = 'users:login'
 
-  @method_decorator(login_required(login_url='users:login'))
   def get(self, request):
     form = AdForm()
     return render(request, self.template_name, {'form': form})
 
-  @method_decorator(login_required(login_url='users:login'))
   def post(self, request):
     ad_with_author = Ad(author=request.user)
     form = AdForm(request.POST, instance=ad_with_author)
