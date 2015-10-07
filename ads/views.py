@@ -4,6 +4,8 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
 from braces.views import LoginRequiredMixin
+
+from utils.views import AuthorRequiredMixin
 from utils.shortcuts import create_or_render
 
 from .decorators import author_required
@@ -41,13 +43,13 @@ class CreateAd(LoginRequiredMixin, View):
     return create_or_render(request, self.template_name, form)
 
 
-class EditAd(View):
-  @method_decorator(author_required)
+class EditAd(AuthorRequiredMixin, View):
+  model = Ad
+
   def get(self, request, ad):
     form = AdForm(instance=ad)
     return render(request, 'ads/edit.html', {'form': form})
 
-  @method_decorator(author_required)
   def post(self, request, ad):
     form = AdForm(request.POST, instance=ad)
     return create_or_render(request, 'ads/show.html', form)
