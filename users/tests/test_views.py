@@ -1,12 +1,13 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 
+from users.tests.setup import UserSetup
 from users.models import User
 
 
-class RegisterTest(TestCase):
+class RegisterTest(UserSetup, TestCase):
     def setUp(self):
-        self.user = _create_user('user', 'password')
+        self.user = self.create_user('user', 'password')
         self.valid_user_data = {
             'username': 'slava',
             'email': 'user@mail.com',
@@ -21,7 +22,7 @@ class RegisterTest(TestCase):
     def test_redirects_if_authenticated(self):
         self.client.login(username=self.user.username, password='password')
         response = self.client.get(reverse('users:register'))
-        self.assertRedirects(response, 'user/1/')
+        self.assertRedirects(response, reverse('pages:index'))
 
     def test_registration(self):
         response = self.client.post(reverse('users:register'), self.valid_user_data)
@@ -32,10 +33,3 @@ class RegisterTest(TestCase):
         invalid_data = self.valid_user_data
         response = self.client.post(reverse('users:register'), data=invalid_data)
         self.assertContains(response, 'Email is required.')
-
-
-def _create_user(name, password):
-    user = User(username=name)
-    user.set_password(password)
-    user.save()
-    return user

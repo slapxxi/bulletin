@@ -1,10 +1,8 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import View
-from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
 from braces.views import LoginRequiredMixin
-
 from utils.views import AuthorRequiredMixin
 from utils.shortcuts import create_or_render
 

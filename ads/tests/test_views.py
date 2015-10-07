@@ -1,48 +1,36 @@
-from nose import with_setup
-from nose.tools import ok_, eq_
-from django.http import HttpResponse
-
-from django.test import Client
-from django.http import HttpResponseRedirect
+from django.test import Client, TestCase
+from django.shortcuts import resolve_url
 from django.core.urlresolvers import reverse
 
-from utils.decorators import use, teardown
-from users.tests.setup import create_user, destroy_users
-
+from users.tests.setup import UserSetup
+from ads.tests.setup import AdSetup
 from ads.models import Ad
 
 
-def create_client():
-    return Client()
+class AdvertisementViewsTest(AdSetup, UserSetup, TestCase):
+    def setUp(self):
+        self.user = self.create_user()
 
+    def test_author_set_automatically(self):
+        "Author is set automatically when ad is created."
+        self.client.login(username=self.user.username, password='password')
+        response = self.client.post(resolve_url(self.user))
+        self.assertContains(response, "User's Profile")
 
-@use(create_client, create_user)
-@teardown(destroy_users)
-def test_auto_author(client, user):
-    "Author is set automatically."
-    client.login(username=user.username, password='password')
-    response = client.post(reverse('ads:new'), data={
-        'title': 'new title',
-        'description': '*'*61,
-        'price_0': 100,
-        'price_1': 'RUB',
-    })
-    eq_(Ad.objects.count(), 1)
-    ok_(isinstance(response, HttpResponseRedirect))
+    def test_login_required(self):
+        "Login required in order to create an advertisement."
+        response = self.client.get(reverse('ads:new'))
+        self.assertRedirects(response, reverse('users:login')+
+            '?next='+reverse('ads:new'))
 
+    def test_updating_advertisement(self):
+        "Only authors can update their ads."
+        ad = self.create_advertisement(author=self.user)
+        response = self.client.get(reverse('ads:edit', args=[ad.id]))
+        self.assertRedirects(response, resolve_url(ad))
 
-@use(create_client, create_user)
-@teardown(destroy_users)
-def test_delete_ad(client, user):
-    "Deleting an ad via HTTP."
-    client.login(username=user.username, password='password')
-    ad = Ad.objects.create(author=user)
-    response = client.get(reverse('ads:delete', args=[ad.id]))
-    ok_(isinstance(response, HttpResponseRedirect))
-
-
-@use(create_client)
-def test_login_required(client):
-    "Login required in order to create an ad."
-    response = client.get(reverse('ads:new'))
-    ok_(isinstance(response, HttpResponseRedirect))
+    def test_deleting_advertisement(self):
+        "Only authors can delete their ads."
+        ad = self.create_advertisement(author=self.user)
+        response = self.client.get(reverse('ads:delete', args=[ad.id]))
+        self.assertRedirects(response, resolve_url(ad))

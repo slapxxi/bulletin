@@ -24,6 +24,5 @@ class Register(AnonymousRequiredMixin, View):
         return render(request, 'users/register.html', {'form': form})
 
     def post(self, request):
-        return create_or_render(request,
-                               'users/register.html',
+        return create_or_render(request, 'users/register.html',
                                 UserCreationForm)

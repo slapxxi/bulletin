@@ -1,37 +1,28 @@
 from datetime import datetime
 
+from django.test import TestCase
 from django.core.exceptions import ValidationError
 
-from nose import with_setup
-from nose.tools import ok_, eq_, raises
-
-from utils.decorators import use, teardown
-from users.tests.setup import create_user, destroy_users
+from users.tests.setup import UserSetup
+from ads.tests.setup import AdSetup
 from ads.models import Ad
 
 
-@use(create_user)
-@teardown(destroy_users)
-def test_str_representation(user):
-    "An ad string representation."
-    ad = Ad.objects.create(title='test ad', author=user)
-    eq_(str(ad), '"test ad" by user')
+class AdvertisementTest(AdSetup, UserSetup, TestCase):
+    def setUp(self):
+        self.user = self.create_user()
 
+    def test_price_min_value(self):
+        "Price can't be lower than required."
+        ad = self.create_advertisement(author=self.user, price=-100)
+        with self.assertRaises(ValidationError):
+            ad.clean_fields()
 
-@use(create_user)
-@teardown(destroy_users)
-def test_published_at(user):
-    ad = Ad.objects.create(author=user)
-    ok_(isinstance(ad.published_at, datetime))
+    def test_published_at_auto_created(self):
+        "Published_at field is auto created."
+        ad = Ad.objects.create(author=self.user)
+        self.assertIsInstance(ad.published_at, datetime)
 
-
-@use(create_user)
-@teardown(destroy_users)
-@raises(ValidationError)
-def test_price_validation(user):
-    "Price can't be lower than required."
-    ad = Ad.objects.create(title='test',
-         author=user,
-         description='*'*61,
-         price=-1)
-    ad.clean_fields()
+    def test_str_representation(self):
+        ad = Ad(title="test", author=self.user)
+        self.assertEquals(str(ad), '"test" by user')

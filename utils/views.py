@@ -1,3 +1,6 @@
+from django.shortcuts import get_object_or_404, redirect
+
+
 class AuthorRequiredMixin:
     def dispatch(self, request, pk, *args, **kwargs):
         instance = get_object_or_404(self.model, pk=pk)
