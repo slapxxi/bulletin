@@ -12,16 +12,18 @@ from .forms import UserCreationForm
 
 @login_required(login_url='users:login')
 def user(request, id):
-  user = get_object_or_404(User, pk=id)
-  return render(request, 'users/user.html', {'user': user})
+    user = get_object_or_404(User, pk=id)
+    return render(request, 'users/user.html', {'user': user})
 
 
 class Register(AnonymousRequiredMixin, View):
-  authenticated_redirect_url = '/'
+    authenticated_redirect_url = '/'
 
-  def get(self, request):
-    form = UserCreationForm()
-    return render(request, 'users/register.html', {'form': form})
+    def get(self, request):
+        form = UserCreationForm()
+        return render(request, 'users/register.html', {'form': form})
 
-  def post(self, request):
-    return create_or_render(request, 'users/register.html', UserCreationForm)
+    def post(self, request):
+        return create_or_render(request,
+                               'users/register.html',
+                                UserCreationForm)

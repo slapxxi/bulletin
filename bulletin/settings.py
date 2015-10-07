@@ -114,13 +114,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-  os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
 LOGIN_REDIRECT_URL = '/'
 
 ABSOLUTE_URL_OVERRIDES = {
-  'auth:user': lambda u: '/user/{}/'.format(u.id),
+    'auth:user': lambda u: '/user/{}/'.format(u.id),
 }
 
 AUTH_USER_MODEL = 'users.User'
