@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {{ block.super }}
+  {{ user.username }} | Edit
+{% endblock %}
+
+{% block content %}
+  <h1>Edit Your Profile</h1>
+
+  {# TODO: Don't send if not changed. #}
+  <form action="{% url 'users:edit' user.id %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Update Profile">
+  </form>
+{% endblock %}

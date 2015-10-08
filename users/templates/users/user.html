@@ -14,6 +14,7 @@ User |
 {% block content %}
   <section>
     <h1>{{ user.username|title }}'s Profile</h1>
+    <a href="{% url 'users:edit' user.id %}">Edit Profile</a>
 
     <h2>Published Advertisements</h2>
     {% if user.ad_set.all %}

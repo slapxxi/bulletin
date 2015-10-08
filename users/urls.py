@@ -7,6 +7,7 @@ from . import views
 urlpatterns = [
     url(r'^register/$', views.Register.as_view(), name='register'),
     url(r'^user/(\d+)/$', views.user, name='user'),
+    url(r'^user/(\d+)/edit/$', views.EditUser.as_view(), name='edit'),
     url(r'^login/$', auth_views.login, {'template_name': 'users/login.html'}, name='login'),
     url(r'^', include('django.contrib.auth.urls')),
 ]

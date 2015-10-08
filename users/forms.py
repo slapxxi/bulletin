@@ -38,3 +38,19 @@ class UserCreationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class UserEditForm(forms.ModelForm):
+    error_messages = {
+        'missing_email': 'Email is required.',
+    }
+
+    class Meta:
+        model = User
+        fields = ('phone_number', 'email',)
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if not email:
+            raise forms.ValidationError(self.error_messages['missing_email'], code='missing_email')
+        return email

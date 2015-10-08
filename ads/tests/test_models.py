@@ -23,6 +23,11 @@ class AdvertisementTest(AdSetup, UserSetup, TestCase):
         ad = Ad.objects.create(author=self.user)
         self.assertIsInstance(ad.published_at, datetime)
 
+    def test_is_author(self):
+        ad = Ad.objects.create(author=self.user)
+        self.assertTrue(ad.is_author(self.user))
+
     def test_str_representation(self):
         ad = Ad(title="test", author=self.user)
-        self.assertEquals(str(ad), '"test" by user')
+        self.assertEquals(str(ad), 'test')
+        self.assertEquals(repr(ad), '<Ad: test>')

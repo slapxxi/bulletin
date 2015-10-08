@@ -11,7 +11,8 @@ from locations.models import Location
 
 
 class Ad(models.Model):
-    # TODO: Add ability to add a set of images.
+    # TODO: Add a set of images.
+    # TODO: Add view count.
     title        = models.CharField(max_length=120)
     description  = models.TextField(validators=[MinLengthValidator(60),])
     author       = models.ForeignKey(User)
@@ -29,7 +30,4 @@ class Ad(models.Model):
         return user.id == self.author.id
 
     def __str__(self):
-        return '"{}" by {}'.format(self.title, self.author)
-
-    def __repr__(self):
-        return '<Advertisement: "{}" by {}>'.format(self.title, self.author)
+        return self.title

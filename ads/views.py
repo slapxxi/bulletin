@@ -12,7 +12,7 @@ from .models import Ad
 
 
 def index(request):
-    ads = Ad.objects.all().order_by('-published_at')
+    ads = Ad.objects.order_by('-published_at')
     return render(request, 'ads/index.html', {'ads': ads})
 
 
